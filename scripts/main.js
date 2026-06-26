@@ -21,19 +21,28 @@ export const getMonthYearDate = (startDateInMs) => {
     return `${monthKey[startMonth]} ${startYear}`;
 }
 
+export const projects = [
+    {}, 
+    {}, 
+    {}, 
+    {}, 
+    {}
+];
+
+
 export const jobs = [
     {   
-        jobType: "Tech",
+        jobType: ["Tech"],
         jobTitle: "Clerical IT",
         companyName: "Lambton Kent District School Board",
-        dateStarted: `${getMonthYearDate(new Date("2023-05-02"))} - ${getMonthYearDate(new Date("2023-08-02"))}, ${getMonthYearDate(new Date("2024-05-02"))} - ${getMonthYearDate(new Date("2024-08-02"))}, ${getMonthYearDate(new Date("2025-05-02"))} - ${getMonthYearDate(new Date("2025-08-02"))}`,
+        datesDisplay: `${getMonthYearDate(new Date("2023-05-02"))} - ${getMonthYearDate(new Date("2023-08-02"))}, ${getMonthYearDate(new Date("2024-05-02"))} - ${getMonthYearDate(new Date("2024-08-02"))}, ${getMonthYearDate(new Date("2025-05-02"))} - ${getMonthYearDate(new Date("2025-08-02"))}`,
         timeInPos: getDateInPosition(new Date("2023-05-02"), new Date("2025-08-02")),
         jobDesc: "Work in an office to check OSR folders, their contents, and then add a scanned and filled out copy to the database.",
         skillsDeveloped: ["Office work", "Document Scanning via Laserfiche", "Data Entry"]
     },
 
     {
-        jobType: "Education",
+        jobType: ["Education"],
         jobTitle: "Resident Assistant",
         companyName: "University of Windsor",
         datesDisplay: `${getMonthYearDate(new Date("2023-08-02"))} - ${getMonthYearDate(new Date("2024-05-02"))}`,
@@ -43,7 +52,7 @@ export const jobs = [
     },
     
     {
-        jobType: "Education",
+        jobType: ["Tech", "Education"],
         jobTitle: "Teaching Assistant",
         companyName: `University of Windsor`,
         datesDisplay: `${getMonthYearDate(new Date("2024-09-02"))} - ${getMonthYearDate(new Date("2025-01-02"))}`,
@@ -53,7 +62,7 @@ export const jobs = [
     },
 
     {
-        jobType: "General Labour",
+        jobType: ["General Labour"],
         jobTitle: "Kennel Attendent",
         companyName: "Blenheim Veterinary Hospital",
         datesDisplay: `${getMonthYearDate(new Date("2018-11-24"))} - ${getMonthYearDate(new Date("2022-08-02"))}`,
@@ -63,95 +72,3 @@ export const jobs = [
     },
 ]
 
-
-
-// End of jobs section
-
-
-// Beginning of experiences section
-
-
-
-export const courses = [
-    {
-        commonName: "Computer Networks",
-        courseCode: "COMP3670",
-        department: "Computer Science",
-        description: "",
-        learningGoals: "",
-        projects: []
-    },
-    {
-        commonName: "Web Information Systems Development",
-        courseCode: "COMP3340",
-        department: "Computer Science",
-        description: "",
-        learningGoals: "",
-        projects: []
-    },
-    {
-        commonName: "Advanced Website Design",
-        courseCode: "COMP2707",
-        department: "Computer Science",
-        description: "",
-        learningGoals: "",
-        projects: []
-    },
-    {
-        commonName: "Web Based Data Management",
-        courseCode: "COMP3077",
-        department: "Computer Science",
-        description: "",
-        learningGoals: "",
-        projects: []
-    },
-    {
-        commonName: "Database Management Systems",
-        courseCode: "COMP3150",
-        department: "Computer Science",
-        description: "",
-        learningGoals: "",
-        projects: []
-
-    },
-    {
-        commonName: "Data Analytics",
-        courseCode: "COMP3250",
-        department: "Computer Science",
-        description: "",
-        learningGoals: "",
-        projects: []
-    },
-    {
-        commonName: "Intro to Multimedia Systems",
-        courseCode: "COMP3500",
-        department: "Computer Science",
-        description: "",
-        learningGoals: "",
-        projects: []
-    },
-    {
-        commonName: "Intro to Computer Graphics",
-        courseCode: "COMP3520",
-        department: "Computer Science",
-        description: "",
-        learningGoals: "",
-        projects: []
-    },
-    {
-        commonName: "Language, Grammar Translators",
-        courseCode: "COMP2140",
-        department: "Computer Science",
-        description: "",
-        learningGoals: "",
-        projects: []
-    },
-    {
-        commonName: "Principles Of Programming Languages",
-        courseCode: "COMP4400",
-        department: "Computer Science",
-        description: "",
-        learningGoals: "",
-        projects: [],
-    },
-];

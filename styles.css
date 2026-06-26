@@ -1,17 +1,14 @@
 :root {
-    --darkSpring: #3D7052;
-
-    --darkSlate: #2A403C;
-    --darkSlate-hover: #20302d;
-    --gunMetal: #152324;
-    --ashGray: #B8D9CB;
-    --cambridgeBlue: #70947D;
-
-    --bg-color: #EEEEEE;
+    --primary: #10B981;
+    --surface: #111827;
+    --txt: #F3F4F6;
+    --bg-color: #0B1220;
 
     --grid-template-size: 12;
     --standard-border-size: 0.2rem;
     --standard-border-radius: 1rem;
+
+    --standard-shadow: 0rem 0.125rem 0 #33333343;
 }
 
 * {
@@ -24,54 +21,73 @@ html {
     overflow-x: hidden;
 }
 
-body {
-    width: 100vw;
-    height: 100vh;
-    min-height: fit-content;
+p, li, a, h4, h5, h6 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+} 
+
+h1, h2, h3 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+p, li, a, h1, h2, h3, h4, h5, h6 {
+    color: var(--txt);
+}
+
+.bg {
     background-color: var(--bg-color);
 }
 
-
-nav {
-    width: 100%;
+.flex-display {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-
 }
 
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-justify-start {
+    justify-content: start;
+}
+
+.flex-justify-centre {
+    justify-content: center;
+}
+
+.flex-align-centre {
+    align-items: center;
+}
+
+.full-width {
+    width: 100%
+}
+
+.list-style {
+    list-style: none;
+}
+
+.nav-ul {
+    justify-content: space-around;
+    list-style: none;
+
+}
 
 .nav-links {
     width: 40%;
 }
 
-nav ul {
-    display: flex;
-    justify-content: space-around;
-    list-style: none;
-}
-
-nav li {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-nav a {
+.nav-link {
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: var(--gunMetal);
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 700;
     padding: 1.5rem 2rem;
-    outline: none;
+    font-weight: 700;
     height: 0.5rem;
-    margin: 1rem;
-    border-radius: var(--standard-border-radius);
+    margin: 1rem 0 0.5rem 0;
+    border: solid var(--surface) 1px;
 }
 
 nav a:hover + hr:not(.current-page + hr) {
@@ -85,12 +101,10 @@ nav a:hover:not(.current-page) {
 
 @keyframes nav-link-background {
     from {
-        background-color: var(--bg-color);
-        
+        background-colOR: var(--bg-color);
     }
     to {
-        color: var(--bg-color);
-        background-color: var(--darkSlate-hover);
+        background-color: var(--surface);
         
     }
 }
@@ -101,22 +115,23 @@ nav a:hover:not(.current-page) {
         width: 0%;
     }
     to {
-        background-color: var(--darkSlate-hover);
+        background-color: var(--surface);
         width: 100%;
     }
 }
 
-nav hr {
+.nav-link + hr {
     display: none;
-    background-color: var(--darkSlate);
+    background-color: var(--primary);
     width: 100%;
     height: 0.25rem;
-    border-radius: 2rem;
+    border: none;
 }
 
 .current-page {
     color: var(--bg-color);
-    background-color: var(--darkSlate); 
+    background-color: var(--primary); 
+    
 }
 
 .current-page + hr {
@@ -135,14 +150,14 @@ nav hr {
 }
 
 .highlight-txt {
-    color: var(--darkSpring);
+    color: var(--primary);
     font-weight: 600;
 }
 
 .portfolio-desc {
     width: 50%;
     height: 60%;
-    background-color: var(--ashGray);
+    background-color: var(--surface);
     margin-right: 0.5rem;
     padding: 1rem;
 }
@@ -151,9 +166,6 @@ nav hr {
     width: 15%;
     height: 60%;
     object-fit: cover;
-    border: var(--standard-border-size) solid var(--darkSlate);
-
-    box-shadow: 0rem 0.125rem 0 #33333343;
 }
 
 .desc-title {
@@ -170,20 +182,6 @@ nav hr {
 
 }
 
-.exp-titles {
-    margin: 0.5rem;
-    margin-bottom: 0;
-}
-
-.exp-titles:first-of-type {
-    margin-left: 0;
-}
-
-.pronouns {
-    color: var(--darkSlate-hover);
-    opacity: 0.5;
-}
-
 .title-spacing {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
@@ -191,11 +189,11 @@ nav hr {
 }
 
 .badge {
-    background-color: var(--darkSlate);
+    background-color: var(--primary);
     font-size: 1rem;
     padding: 0.25rem 0.5rem;
     border-radius: 0.5rem;
-    color: var(--ashGray);
+    color: var(--surface);
 }
 
 .links-list {
@@ -206,7 +204,7 @@ nav hr {
 }
 
 .personal-links {
-    background-color: var(--darkSlate);
+    background-color: var(--primary);
     color: var(--bg-color);
     display: flex;
     justify-content: center;
@@ -217,7 +215,7 @@ nav hr {
     border-radius: var(--standard-border-radius);
     text-decoration: none;
     margin: 1rem;
-    box-shadow: 0rem 0.125rem 0 #33333343;
+    box-shadow: var(--standard-shadow);
     transition: all 0.25s ease;
     
 }
@@ -228,7 +226,7 @@ nav hr {
 
 .personal-links:hover {
     transform: translateY(-5px);
-    color: var(--ashGray);
+    color: var(--surface);
     background-color: var(--darkSlate-hover);  
 
 }
@@ -248,7 +246,7 @@ nav hr {
     border-radius: 50%;
     cursor: pointer;
     margin: 1rem 0.75rem 0 0.75rem;
-    border: var(--darkSlate) solid var(--standard-border-size);
+    border: var(--primary) solid var(--standard-border-size);
     opacity: 80%;
     transition: all 0.2s ease-in-out;
 }
@@ -261,7 +259,7 @@ nav hr {
 
 .round-btn.selected {
     background-color: var(--cambridgeBlue);
-    border: var(--darkSlate) solid 0.2rem;
+    border: var(--primary) solid 0.2rem;
 }
 
 #courses {
@@ -323,32 +321,6 @@ nav hr {
     margin: 0.5rem;
 }
 
-.course-card {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--ashGray);
-    padding: 1rem;
-    border: solid var(--darkSlate) var(--standard-border-size);
-    transition: outline 0.2s ease-in-out;
-    box-shadow: 0rem 0.125rem 0 #33333343;
-    justify-items: start;
-    align-content: end;
-}
-
-.course-card:hover {
-    transform: translateY(-0.25rem);
-    outline: solid 0.3rem var(--ashGray);
-    transition: transform 0.2s ease-in-out;
-    animation: card-hover-anim 1s;
-    animation-iteration-count: infinite;
-    scale: 1.02;
-    opacity: 1;
-}
-
-.course-card h4 {
-    font-weight: lighter;
-}
-
 .button {
     background: none;
     border: solid var(--standard-border-size) var(--gunMetal);
@@ -356,7 +328,7 @@ nav hr {
     margin-top: 0.5rem;
     cursor: pointer;
     outline: none;
-    color: var(--ashGray);
+    color: var(--surface);
     font-weight: 800;
     text-decoration: none;
     background-color: var(--gunMetal);
@@ -364,16 +336,16 @@ nav hr {
 }
 
 .button:hover {
-    background-color: var(--ashGray);
+    background-color: var(--surface);
     color: var(--gunMetal);
 }
 
 @keyframes card-hover-anim {
     25% {
-        outline: solid 0.3rem var(--ashGray);
+        outline: solid 0.3rem var(--surface);
     }
     90% {
-        outline: solid 0.5rem var(--ashGray);
+        outline: solid 0.5rem var(--surface);
     }
 }
 
