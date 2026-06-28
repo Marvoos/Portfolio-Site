@@ -1,25 +1,17 @@
-import { jobs } from './main.js'
-
+import { jobs } from './main';
+import type { Job } from './types';
 
 const jobExperience = document.getElementById('jobs');
 const educationExperience = document.getElementById('education');
 
-function getUniqueJobTypes() {
-    const jobTypes = ["All"];
-    // Loop through each job
-    jobs.forEach((job, index) => {
-        // Loop through each job type
-        for (let i = 0; i < job.jobType.length; i++) {
-            // If this job doesn't already exist within the list of types, include it.
-            if (!jobTypes.includes(job.jobType[i])) {
-                jobTypes.push(job.jobType[i]);
-            }
-        }
-    })
-    return jobTypes;
+const getUniqueJobTypes = (): string[] => {
+
+    const allTypes: string[] = jobs.flatMap((job: Job) => job.jobType);
+
+    return ["All", ...new Set(allTypes)];
 }
 
-function displayJobFilter() {
+const displayJobFilter = () => {
     // Build a functional JS filter
     const jobTypes = getUniqueJobTypes();
     const selectElement = document.createElement("select");
@@ -33,7 +25,7 @@ function displayJobFilter() {
         selectElement.appendChild(jobTypeOption);
     });
     
-    jobExperience.appendChild(selectElement);
+    jobExperience?.appendChild(selectElement);
 
 }
 
@@ -109,7 +101,7 @@ function displayJobs() {
         jobCard.appendChild(skillsP);
         jobCard.appendChild(skillsDevUl);
 
-        jobExperience.appendChild(jobCard);
+        jobExperience?.appendChild(jobCard);
 
         
     })

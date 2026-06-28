@@ -1,36 +1,50 @@
-export const getDateInPosition = (startDateInMs, endDateInMs) => {
-    const timeDiffInMs = endDateInMs - startDateInMs;
-    const timeDiffInYears = timeDiffInMs / 3.154e+10;
-    const timeDiffInMonths = (timeDiffInMs / 2.628e+9) % 12;
-    if (parseInt(timeDiffInYears) === 0) {
-        return `${parseInt(timeDiffInMonths)} months`;
-    }
-    if (parseInt(timeDiffInMonths) === 0) {
-        if (timeDiffInYears === 1) {
-            return `${parseInt(timeDiffInYears)} year`;
-        }
-        return `${parseInt(timeDiffInYears)} years`;
-    }
-    return (parseInt(timeDiffInYears) === 1) ? `${parseInt(timeDiffInYears)} year, and ${parseInt(timeDiffInMonths)} months` : `${parseInt(timeDiffInYears)} years, and ${parseInt(timeDiffInMonths)} months`;
+import type { Job } from './types';
+
+
+export const isValidDate = (date: Date) : boolean => {
+    return !isNaN(date.getTime());
 }
 
-export const getMonthYearDate = (startDateInMs) => {
+export const getDateInPosition = (startDate: Date, endDate: Date): string => {
+    if (!isValidDate(startDate) || !isValidDate(endDate)) return "Duration Unknown";
+
+    // 1. Calculate total months difference
+    let totalMonths = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+    totalMonths += endDate.getMonth() - startDate.getMonth();
+
+    // Prevent negative results if dates are accidentally swapped
+    if (totalMonths <= 0) return "0 months";
+
+    // 2. Extract years and leftover months
+    const years = Math.floor(totalMonths / 12);
+    const months = totalMonths % 12;
+
+    // 3. Build the output parts dynamically
+    const parts: string[] = [];
+    
+    if (years > 0) {
+        parts.push(`${years} ${years === 1 ? 'year' : 'years'}`);
+    }
+    
+    if (months > 0) {
+        parts.push(`${months} ${months === 1 ? 'month' : 'months'}`);
+    }
+
+    // Join with a comma if both exist (e.g., "1 year, 4 months")
+    return parts.join(", ");
+}
+
+export const getMonthYearDate = (startDate: Date): string => {
+    if (!isValidDate(startDate)) return "N/A";
     const monthKey = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-    const startMonth = startDateInMs.getMonth();
-    const startYear = startDateInMs.getFullYear();
+    const startMonth = startDate.getMonth();
+    const startYear = startDate.getFullYear();
     return `${monthKey[startMonth]} ${startYear}`;
 }
 
-export const projects = [
-    {}, 
-    {}, 
-    {}, 
-    {}, 
-    {}
-];
 
 
-export const jobs = [
+export const jobs: Job[] = [
     {   
         jobType: ["Tech"],
         jobTitle: "Clerical IT",
