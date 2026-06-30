@@ -29,7 +29,7 @@ h1, h2, h3 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-p, li, a, h1, h2, h3, h4, h5, h6 {
+p, label, li, a, h1, h2, h3, h4, h5, h6 {
     color: var(--txt);
 }
 

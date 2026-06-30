@@ -1,22 +1,40 @@
+// Import the jobs array from main.ts and the Job type from types.ts 
 import { jobs } from './main';
 import type { Job } from './types';
 
-const jobExperience = document.getElementById('jobs');
-const educationExperience = document.getElementById('education');
+// Retrieve the outer container div to put the jobs inside.
+const jobCardsDivContainer = document.getElementById('jobs');
 
+const educationExperience = document.getElementById('education-cards');
+
+// Helper function to retrieve a set of all types. This prevents any duplicates from appearing within the list.
 const getUniqueJobTypes = (): string[] => {
-
+    // Map all job types into a flatmap to convert allTypes to a 1-dimensional array
     const allTypes: string[] = jobs.flatMap((job: Job) => job.jobType);
-
-    return ["All", ...new Set(allTypes)];
+    // Convert allTypes array to a set and return this value
+    return [...new Set(allTypes)];
 }
 
+// Dynamically create a job filter element that retrieves job types and creates a select field
 const displayJobFilter = () => {
     // Build a functional JS filter
     const jobTypes = getUniqueJobTypes();
+
+    // Create the label for the input
+    const labelSelect = document.createElement("label");
+    labelSelect.textContent = 'Filter by Job Type: ';
+    labelSelect.htmlFor = "job-types";
+
+    // Create the select element
     const selectElement = document.createElement("select");
+    // Assign id and name 
     selectElement.id = "job-types";
     selectElement.name = "job-types"; 
+
+    const jobTypeAll = document.createElement("option");
+    jobTypeAll.value = "All";
+    jobTypeAll.textContent = "All";
+    selectElement.appendChild(jobTypeAll);
 
     jobTypes.forEach((jobtype, index) => {
         const jobTypeOption = document.createElement("option");
@@ -24,16 +42,26 @@ const displayJobFilter = () => {
         jobTypeOption.textContent = jobtype;
         selectElement.appendChild(jobTypeOption);
     });
-    
-    jobExperience?.appendChild(selectElement);
+    jobCardsDivContainer?.appendChild(labelSelect);
+    jobCardsDivContainer?.appendChild(selectElement);
 
 }
 
-function displayJobs() {
-    displayJobFilter();
+const displayJobs = (jobArray: Job[]) => {
+    // Retrieve the job cards container
+    let jobCardsDiv = document.getElementById('job-cards');
+    // If the container doesn't exist, then create it and append to the outer container div
+    if (!jobCardsDiv) {
+        jobCardsDiv = document.createElement('div');
+        jobCardsDiv.id = 'job-cards';
+        jobCardsDivContainer?.appendChild(jobCardsDiv);
+    }
 
-    // Retreive every job and their index within the list of jobs from main.js
-    jobs.forEach((job, index) => {
+    // Delete the previous children to allow for filtering
+    jobCardsDiv.replaceChildren(); 
+
+    // For every job within the job array, create a card
+    jobArray.forEach((job) => {
         // Create a card container called jobCard, this is the container that each job will go into
         const jobCard = document.createElement("div");
         // Add the card class to this card container
@@ -83,6 +111,7 @@ function displayJobs() {
         jobDescP.textContent = jobDesc;
         skillsP.textContent = "Skills: ";
         
+        // Create a list item for every skill listed within the skills developed property
         skillsDeveloped.forEach((skill) => {
             const skillLi = document.createElement("li");
             skillLi.textContent = skill;
@@ -101,11 +130,41 @@ function displayJobs() {
         jobCard.appendChild(skillsP);
         jobCard.appendChild(skillsDevUl);
 
-        jobExperience?.appendChild(jobCard);
-
+        // Retreive every job and their index within the list of jobs from main.js
+        jobCardsDiv?.appendChild(jobCard);
         
     })
-    
+
 }
 
-displayJobs();
+// Initialize both the job filter and the jobs display
+displayJobFilter();
+displayJobs(jobs);
+
+// Select the job filter to add an event listener
+const jobFilterSelect = document.getElementById("job-types");
+
+
+// On every change of the jobFilter, do the following...
+jobFilterSelect?.addEventListener('change', (event) => {
+    // Retrieve the target of the filter's change event and cast as an HTMLInputElement
+    const filterTarget = event.currentTarget as HTMLInputElement;
+    // Retrieve the value of the event's target. This takes from the value attribute assigned in the filter creation function
+    const filterValue = filterTarget.value;
+
+    // If the filter value is equal to 'All' or 'all' then don't filter anything
+    if (filterValue.toLowerCase() === "all") {
+        displayJobs(jobs);
+    }
+    else {
+        // Otherwise, filter based on job types
+        const filteredJobs = jobs.filter((job) => {
+            if (job.jobType.includes(filterValue)) return true;
+        });
+
+        console.log(filteredJobs);
+        // Display the jobs once again
+        displayJobs(filteredJobs);
+    }
+
+});
