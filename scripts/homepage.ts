@@ -2,6 +2,10 @@
 import { jobs } from './main';
 import type { Job } from './types';
 
+// Important education array from main.ts and Education type from types.ts
+import { education } from './main';
+import { Education } from './types';
+
 // Retrieve the outer container div to put the jobs inside.
 const jobCardsDivContainer = document.getElementById('jobs');
 
@@ -68,7 +72,7 @@ const displayJobs = (jobArray: Job[]) => {
         jobCard.classList.add('card');
 
         // Destructure each property within the jobs
-        const { jobType, 
+        const { jobType,
                 jobTitle, 
                 companyName, 
                 datesDisplay, 
@@ -137,9 +141,80 @@ const displayJobs = (jobArray: Job[]) => {
 
 }
 
+
+/*
+ * 
+ * 
+ * 
+ * Education section
+ */
+
+const educationDisplay = () => {
+    // For each degree or education item, dynamically create a card
+    education.forEach((degree) => {
+        // Destructure the current degree item
+        const {
+            degreeType,
+            degreeName,
+            datesDisplay,
+            timeInPos,
+            degFocus
+        } = degree
+
+        // Create the inital container and set the class to card
+        const educationCard = document.createElement('div');
+        educationCard.className = "card";
+
+        // Create all elements within this card
+        const degreeTypeP = document.createElement('p');
+        const degreeNameh3 = document.createElement('h3');
+        const datesDisplayP = document.createElement('p');
+        const timeInPosP = document.createElement('p');
+        const degFocusUl = document.createElement("ul");
+        const focusP = document.createElement("p");
+
+        // Set elements to their corresponding text
+        degreeTypeP.textContent = degreeType;
+        degreeNameh3.textContent = degreeName;
+        datesDisplayP.textContent = datesDisplay;
+        timeInPosP.textContent = timeInPos;
+        focusP.textContent = "Focus: ";
+        
+        // Create list items for the corresponding ul to ensure the focus property is displayed correctly
+        degFocus.forEach(point => {
+            const pointLi = document.createElement("li");
+            pointLi.textContent = point;
+            degFocusUl.appendChild(pointLi);
+        });
+
+        
+        // Append each element onto the card container
+        educationCard.appendChild(degreeTypeP);
+        educationCard.appendChild(degreeNameh3);
+        educationCard.appendChild(datesDisplayP);
+        educationCard.appendChild(timeInPosP);
+        educationCard.appendChild(focusP);
+        educationCard.appendChild(degFocusUl);
+
+        // Append the card onto the div container for education cards
+        educationExperience?.appendChild(educationCard);
+    });
+
+
+}
+
+
 // Initialize both the job filter and the jobs display
 displayJobFilter();
 displayJobs(jobs);
+// Initialize the education display
+educationDisplay();
+
+/*
+ * 
+ * 
+ * Event Listener Section
+ */
 
 // Select the job filter to add an event listener
 const jobFilterSelect = document.getElementById("job-types");
@@ -168,3 +243,4 @@ jobFilterSelect?.addEventListener('change', (event) => {
     }
 
 });
+

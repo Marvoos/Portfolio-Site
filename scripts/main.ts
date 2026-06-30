@@ -1,4 +1,5 @@
 import type { Job } from './types';
+import type { Education } from './types';
 
 
 export const isValidDate = (date: Date) : boolean => {
@@ -84,5 +85,20 @@ export const jobs: Job[] = [
         jobDesc: "Nightly clean of the veterinary hospital. This includes taking out the garbage, washing dishes, cleaning kennels and cages, disinfecting surfaces, vacuuming, mopping, and ensuring the building is locked up and clean for the next day.",
         skillsDeveloped: ["Time Management","Organization","Cleaning"]
     },
+]
+
+export const education: Education[] = [
+    {
+        degreeType: "Bachelors of Science",
+        degreeName: "Computer Science",
+        datesDisplay: `${getMonthYearDate(new Date("2022-09-07"))} - ${getMonthYearDate(new Date("2026-06-04"))}`,
+        timeInPos: `${getDateInPosition(new Date("2022-09-07"), new Date("2026-06-04"))}`,
+        degFocus: [
+            "With a focus on computing fundamentals and low-level architecture.",
+            "Low-level programming languages like Assembly and C are heavily used throughout the program.",
+            "This program also places a focus on foundational math and logic used inside every program.",
+            "As a CS student, I focused on the network architecture and full-stack website development in my later courses."
+        ],
+    }
 ]
 

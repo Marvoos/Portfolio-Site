@@ -1,5 +1,9 @@
+export interface Project {
+    
+}
+
 export interface Job {
-    jobType: string[],
+    jobType: string[];
     jobTitle: string;
     companyName: string;
     datesDisplay: string;
@@ -8,3 +12,10 @@ export interface Job {
     skillsDeveloped: string[]; 
 }
 
+export interface Education {
+    degreeType: string;
+    degreeName: string;
+    datesDisplay: string;
+    timeInPos: string;
+    degFocus: string[];
+}
