@@ -310,9 +310,6 @@ const displayProjects = (projects: Project[]) => {
         projectCardA.appendChild(projectIntervalP);
         
         projectCardsDiv.appendChild(projectCardA);
-        
-
-
 
     });
 
@@ -330,13 +327,3 @@ projectFilterSelect?.addEventListener('change', (event) => {
     const filteredArray = filterEvent(event, projects);
     displayProjects(filteredArray);
 });
-
-
-
-
-
-
-
-
-
-
