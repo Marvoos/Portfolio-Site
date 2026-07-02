@@ -44,6 +44,9 @@ export const getMonthYearDate = (startDate: Date): string => {
     return `${monthKey[startMonth]} ${startYear}`;
 }
 
+export const projects: Project[] = [
+   
+]
 
 
 export const jobs: Job[] = [
