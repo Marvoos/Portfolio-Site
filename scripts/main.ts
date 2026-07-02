@@ -1,5 +1,6 @@
 import type { Job } from './types';
 import type { Education } from './types';
+import type { Project } from './types';
 
 
 export const isValidDate = (date: Date) : boolean => {
