@@ -1,5 +1,10 @@
 export interface Project {
-    
+    projType: string[];
+    projTitle: string;
+    projStart: string;
+    projFinish: string;
+    projLanguages: string[];
+    projDesc: string[];
 }
 
 export interface Job {
