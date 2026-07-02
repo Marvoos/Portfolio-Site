@@ -4,7 +4,7 @@ import type { Job } from './types';
 
 // Important education array from main.ts and Education type from types.ts
 import { education } from './main';
-import { Education } from './types';
+import type { Education } from './types';
 
 // Retrieve the outer container div to put the jobs inside.
 const jobCardsDivContainer = document.getElementById('jobs');
