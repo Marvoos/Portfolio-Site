@@ -1,14 +1,17 @@
 export interface Project {
-    projType: string[];
+    type: string[];
+    projLink: string;
+    projImg: string;
     projTitle: string;
     projStart: string;
     projFinish: string;
     projLanguages: string[];
-    projDesc: string[];
+    projDesc: string;
+    projFeatures: string[];
 }
 
 export interface Job {
-    jobType: string[];
+    type: string[];
     jobTitle: string;
     companyName: string;
     datesDisplay: string;
@@ -18,7 +21,7 @@ export interface Job {
 }
 
 export interface Education {
-    degreeType: string;
+    degType: string;
     degreeName: string;
     datesDisplay: string;
     timeInPos: string;

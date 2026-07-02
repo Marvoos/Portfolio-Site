@@ -45,13 +45,59 @@ export const getMonthYearDate = (startDate: Date): string => {
 }
 
 export const projects: Project[] = [
-   
+   {
+        type: ["Web Development", "Full Stack"],
+        projLink: "https://github.com/Mini1Git/project3340",
+        projImg: "#",
+        projTitle: "Food Ordering & Delivery Web Application (PHP + MariaDB)",
+        projStart: getMonthYearDate(new Date("2026-01-07")),
+        projFinish: getMonthYearDate(new Date("2026-03-36")),
+        projLanguages: ["HTML", "CSS", "JavaScript", "PHP", "MariaDB", "MySQL"],
+        projDesc: "Built a full-stack food ordering web application that simulates a real-world delivery platform, allowing users to browse items, place orders, and interact with a backend database system. The application includes secure server-side logic for handling data, user actions, and database transactions using PHP and MariaDB, with a responsive frontend built in HTML, CSS, and JavaScript.",
+        projFeatures: ["Dynamic food ordering interface with interactive UI",
+                        "Backend order processing and database integration",
+                        "Secure data handling using PHP server-side logic",
+                        "MariaDB database design for storing users and orders"]
+   },
+   {
+        type: ["Web Development", "Full Stack"],
+        projLink: "https://github.com/Marvoos/project3077",
+        projImg: "#",
+        projTitle: "Full-Stack Library Management System (PHP + MariaDB)",
+        projStart: getMonthYearDate(new Date("2026-01-07")),
+        projFinish: getMonthYearDate(new Date("2026-04-18")),
+        projLanguages: ["HTML", "CSS", "JavaScript", "PHP", "MariaDB", "MySQL"],
+        projDesc: "Developed a fully functional web-based library management system that allows users to register, log in securely, and manage book borrowing and returns.",
+        projFeatures: [
+            "Authentication during sign up process",
+            "Session handling to provide features for signed in users",
+            "Secure data handling using PHP server-side logic",
+            "MariaDB database design for storing users and book borrows/returns"
+        ]
+   },
+   {
+        type: ["Web Development", "Front End"],
+        projLink: "https://github.com/Marvoos/PortfolioSite",
+        projImg: "#",
+        projTitle: "Personal Portfolio using Front-End Technologies",
+        projStart: getMonthYearDate(new Date("2026-06-11")),
+        projFinish: "NOW",
+        projLanguages: ["HTML", "CSS", "TypeScript"],
+        projDesc: "Developed an interactive, dynamic porfolio site to display experience and skills to employers and other passerbys. Experimented with TypeScript and transpiled using Vite",
+        projFeatures: [
+            "Designed using UI/UX design principles in tandem with CSS and semantic HTML",
+            "Running on AWS to experiment with modern server hosting technologies",
+            "Developed with the backend in mind. Uses TypeScript to separate the data from logic and dynamically creates filters using data.",
+            "Includes projects, experience, education, resume, and contact information if needed."
+        ]
+        
+   },
 ]
 
 
 export const jobs: Job[] = [
     {   
-        jobType: ["Tech"],
+        type: ["Tech"],
         jobTitle: "Clerical IT",
         companyName: "Lambton Kent District School Board",
         datesDisplay: `${getMonthYearDate(new Date("2023-05-02"))} - ${getMonthYearDate(new Date("2023-08-02"))}, ${getMonthYearDate(new Date("2024-05-02"))} - ${getMonthYearDate(new Date("2024-08-02"))}, ${getMonthYearDate(new Date("2025-05-02"))} - ${getMonthYearDate(new Date("2025-08-02"))}`,
@@ -61,7 +107,7 @@ export const jobs: Job[] = [
     },
 
     {
-        jobType: ["Education"],
+        type: ["Education"],
         jobTitle: "Resident Assistant",
         companyName: "University of Windsor",
         datesDisplay: `${getMonthYearDate(new Date("2023-08-02"))} - ${getMonthYearDate(new Date("2024-05-02"))}`,
@@ -71,7 +117,7 @@ export const jobs: Job[] = [
     },
     
     {
-        jobType: ["Tech", "Education"],
+        type: ["Tech", "Education"],
         jobTitle: "Teaching Assistant",
         companyName: `University of Windsor`,
         datesDisplay: `${getMonthYearDate(new Date("2024-09-02"))} - ${getMonthYearDate(new Date("2025-01-02"))}`,
@@ -81,7 +127,7 @@ export const jobs: Job[] = [
     },
 
     {
-        jobType: ["General Labour"],
+        type: ["General Labour"],
         jobTitle: "Kennel Attendent",
         companyName: "Blenheim Veterinary Hospital",
         datesDisplay: `${getMonthYearDate(new Date("2018-11-24"))} - ${getMonthYearDate(new Date("2022-08-02"))}`,
@@ -89,11 +135,12 @@ export const jobs: Job[] = [
         jobDesc: "Nightly clean of the veterinary hospital. This includes taking out the garbage, washing dishes, cleaning kennels and cages, disinfecting surfaces, vacuuming, mopping, and ensuring the building is locked up and clean for the next day.",
         skillsDeveloped: ["Time Management","Organization","Cleaning"]
     },
+
 ]
 
 export const education: Education[] = [
     {
-        degreeType: "Bachelors of Science",
+        degType: "Bachelors of Science",
         degreeName: "Computer Science",
         datesDisplay: `${getMonthYearDate(new Date("2022-09-07"))} - ${getMonthYearDate(new Date("2026-06-04"))}`,
         timeInPos: `${getDateInPosition(new Date("2022-09-07"), new Date("2026-06-04"))}`,

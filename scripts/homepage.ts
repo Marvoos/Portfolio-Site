@@ -6,48 +6,76 @@ import type { Job } from './types';
 import { education } from './main';
 import type { Education } from './types';
 
+
+// Import project data from main.ts and Project type from types.ts
+import { projects } from './main';
+import type { Project } from './types';
+
+
+
+
 // Retrieve the outer container div to put the jobs inside.
 const jobCardsDivContainer = document.getElementById('jobs');
 
 const educationExperience = document.getElementById('education-cards');
 
 // Helper function to retrieve a set of all types. This prevents any duplicates from appearing within the list.
-const getUniqueJobTypes = (): string[] => {
+const getUniqueTypes = (array: Array<any>): string[] => {
     // Map all job types into a flatmap to convert allTypes to a 1-dimensional array
-    const allTypes: string[] = jobs.flatMap((job: Job) => job.jobType);
+    const allTypes: string[] = array.flatMap((item) => item.type);
     // Convert allTypes array to a set and return this value
     return [...new Set(allTypes)];
 }
 
+const filterEvent = (event: Event, array: Array<any>) : Array<any> => {
+    // Retrieve the target of the filter's change event and cast as an HTMLInputElement
+    const filterTarget = event.currentTarget as HTMLInputElement;
+    // Retrieve the value of the event's target. This takes from the value attribute assigned in the filter creation function
+    const filterValue = filterTarget.value;
+
+    // If the filter value is equal to 'All' or 'all' then don't filter anything
+    if (filterValue.toLowerCase() === "all") {
+        return array;
+    }
+    else {
+        // Otherwise, filter based on job types
+        const filteredArray = array.filter((item: any) => {
+            if (item.type.includes(filterValue)) return true;
+        });
+        return filteredArray;
+        
+    }
+}
+
 // Dynamically create a job filter element that retrieves job types and creates a select field
-const displayJobFilter = () => {
+const displayFilter = (array: Array<any>, selectText: String, idName: String, container: HTMLDivElement) => {
     // Build a functional JS filter
-    const jobTypes = getUniqueJobTypes();
+    const arrayTypes = getUniqueTypes(array);
 
     // Create the label for the input
     const labelSelect = document.createElement("label");
-    labelSelect.textContent = 'Filter by Job Type: ';
-    labelSelect.htmlFor = "job-types";
+    labelSelect.textContent = `Filter ${selectText}: `;
+    labelSelect.htmlFor = `${idName}`;
 
     // Create the select element
     const selectElement = document.createElement("select");
     // Assign id and name 
-    selectElement.id = "job-types";
-    selectElement.name = "job-types"; 
+    selectElement.id = `${idName}`;
+    selectElement.name = `${idName}`; 
 
-    const jobTypeAll = document.createElement("option");
-    jobTypeAll.value = "All";
-    jobTypeAll.textContent = "All";
-    selectElement.appendChild(jobTypeAll);
+    const typeAll = document.createElement("option");
+    typeAll.value = "All";
+    typeAll.textContent = "All";
+    selectElement.appendChild(typeAll);
 
-    jobTypes.forEach((jobtype, index) => {
-        const jobTypeOption = document.createElement("option");
-        jobTypeOption.value = jobtype;
-        jobTypeOption.textContent = jobtype;
-        selectElement.appendChild(jobTypeOption);
+    arrayTypes.forEach((type: any) => {
+        const typeOption = document.createElement("option");
+        typeOption.value = type;
+        typeOption.textContent = type;
+        selectElement.appendChild(typeOption);
     });
-    jobCardsDivContainer?.appendChild(labelSelect);
-    jobCardsDivContainer?.appendChild(selectElement);
+    container?.appendChild(labelSelect);
+    container?.appendChild(selectElement);
 
 }
 
@@ -72,7 +100,7 @@ const displayJobs = (jobArray: Job[]) => {
         jobCard.classList.add('card');
 
         // Destructure each property within the jobs
-        const { jobType,
+        const { type,
                 jobTitle, 
                 companyName, 
                 datesDisplay, 
@@ -107,7 +135,7 @@ const displayJobs = (jobArray: Job[]) => {
         
 
         // Assign the corresponding text content
-        typeP.textContent = jobType.join(', ');
+        typeP.textContent = type.join(', ');
         titleh3.textContent = jobTitle;
         compNameh5.textContent = companyName;
         dateDisplayP.textContent = datesDisplay;
@@ -149,12 +177,12 @@ const displayJobs = (jobArray: Job[]) => {
  * Education section
  */
 
-const educationDisplay = () => {
+const educationDisplay = (education: Education[]) => {
     // For each degree or education item, dynamically create a card
     education.forEach((degree) => {
         // Destructure the current degree item
         const {
-            degreeType,
+            degType,
             degreeName,
             datesDisplay,
             timeInPos,
@@ -174,7 +202,7 @@ const educationDisplay = () => {
         const focusP = document.createElement("p");
 
         // Set elements to their corresponding text
-        degreeTypeP.textContent = degreeType;
+        degreeTypeP.textContent = degType;
         degreeNameh3.textContent = degreeName;
         datesDisplayP.textContent = datesDisplay;
         timeInPosP.textContent = timeInPos;
@@ -203,12 +231,12 @@ const educationDisplay = () => {
 
 }
 
-
+const jobFilterId = "job-types";
 // Initialize both the job filter and the jobs display
-displayJobFilter();
+displayFilter(jobs, "by Job Type", jobFilterId, jobCardsDivContainer as HTMLDivElement);
 displayJobs(jobs);
 // Initialize the education display
-educationDisplay();
+educationDisplay(education);
 
 /*
  * 
@@ -217,30 +245,98 @@ educationDisplay();
  */
 
 // Select the job filter to add an event listener
-const jobFilterSelect = document.getElementById("job-types");
-
+const jobFilterSelect = document.getElementById(jobFilterId);
 
 // On every change of the jobFilter, do the following...
 jobFilterSelect?.addEventListener('change', (event) => {
-    // Retrieve the target of the filter's change event and cast as an HTMLInputElement
-    const filterTarget = event.currentTarget as HTMLInputElement;
-    // Retrieve the value of the event's target. This takes from the value attribute assigned in the filter creation function
-    const filterValue = filterTarget.value;
-
-    // If the filter value is equal to 'All' or 'all' then don't filter anything
-    if (filterValue.toLowerCase() === "all") {
-        displayJobs(jobs);
-    }
-    else {
-        // Otherwise, filter based on job types
-        const filteredJobs = jobs.filter((job) => {
-            if (job.jobType.includes(filterValue)) return true;
-        });
-
-        console.log(filteredJobs);
-        // Display the jobs once again
-        displayJobs(filteredJobs);
-    }
-
+    const filteredJobs = filterEvent(event, jobs);
+    displayJobs(filteredJobs);
 });
+
+/*
+ *
+ *
+ * Projects section 
+ * 
+ */
+
+const projectContainerDiv = document.getElementById("projects-div-container"); 
+
+const displayProjects = (projects: Project[]) => {
+    let projectCardsDiv = document.getElementById("project-cards-div");
+
+    if (!projectCardsDiv) {
+        projectCardsDiv = document.createElement("div");
+        projectCardsDiv.id = "project-cards-div";
+        projectContainerDiv?.appendChild(projectCardsDiv);
+    }
+
+    projectCardsDiv.replaceChildren();
+
+    projects.forEach((project) => {
+
+        const {
+            type,
+            projImg,
+            projTitle,
+            projStart,
+            projFinish
+        } = project 
+
+
+
+        const projectCardA = document.createElement("a");
+        const projectTypeP = document.createElement("p");
+        const projectImg = document.createElement("img");
+        const projectTitleh3 = document.createElement("h3");
+        const projectIntervalP = document.createElement("p");
+
+        projectCardA.href = `projects/index.html?${encodeURI(projTitle)}`;
+        projectCardA.className = "card";
+
+        projectTypeP.textContent = type.join(", ");
+
+        projectImg.src = projImg;
+
+        projectTitleh3.textContent = projTitle;
+
+        projectIntervalP.textContent = `${projStart} - ${projFinish}`
+
+        
+
+        projectCardA.appendChild(projectTypeP);
+        projectCardA.appendChild(projectImg);
+        projectCardA.appendChild(projectTitleh3);
+        projectCardA.appendChild(projectIntervalP);
+        
+        projectCardsDiv.appendChild(projectCardA);
+        
+
+
+
+    });
+
+
+}
+
+const projectFilterId = "project-type";
+displayFilter(projects, "Projects by type", projectFilterId, projectContainerDiv as HTMLDivElement);
+displayProjects(projects);
+
+const projectFilterSelect = document.getElementById(projectFilterId);
+
+
+projectFilterSelect?.addEventListener('change', (event) => {
+    const filteredArray = filterEvent(event, projects);
+    displayProjects(filteredArray);
+});
+
+
+
+
+
+
+
+
+
 
