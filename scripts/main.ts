@@ -48,7 +48,7 @@ export const projects: Project[] = [
    {
         type: ["Web Development", "Full Stack"],
         projLink: "https://github.com/Mini1Git/project3340",
-        projImg: "#",
+        projImgs: ["#"],
         projTitle: "Food Ordering & Delivery Web Application (PHP + MariaDB)",
         projStart: getMonthYearDate(new Date("2026-01-07")),
         projFinish: getMonthYearDate(new Date("2026-03-36")),
@@ -62,7 +62,7 @@ export const projects: Project[] = [
    {
         type: ["Web Development", "Full Stack"],
         projLink: "https://github.com/Marvoos/project3077",
-        projImg: "#",
+        projImgs: ["#"],
         projTitle: "Full-Stack Library Management System (PHP + MariaDB)",
         projStart: getMonthYearDate(new Date("2026-01-07")),
         projFinish: getMonthYearDate(new Date("2026-04-18")),
@@ -78,7 +78,7 @@ export const projects: Project[] = [
    {
         type: ["Web Development", "Front End"],
         projLink: "https://github.com/Marvoos/PortfolioSite",
-        projImg: "#",
+        projImgs: ["#"],
         projTitle: "Personal Portfolio using Front-End Technologies",
         projStart: getMonthYearDate(new Date("2026-06-11")),
         projFinish: "NOW",
@@ -92,6 +92,8 @@ export const projects: Project[] = [
         ]
         
    },
+
+   
 ]
 
 

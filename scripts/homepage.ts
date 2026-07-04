@@ -262,30 +262,32 @@ jobFilterSelect?.addEventListener('change', (event) => {
 
 const projectContainerDiv = document.getElementById("projects-div-container"); 
 
-const displayProjects = (projects: Project[]) => {
+const displayProjects = (projects: Project[], projectLimit: number) => {
     let projectCardsDiv = document.getElementById("project-cards-div");
 
     if (!projectCardsDiv) {
         projectCardsDiv = document.createElement("div");
         projectCardsDiv.id = "project-cards-div";
+        projectCardsDiv.classList.add("project-grid");
         projectContainerDiv?.appendChild(projectCardsDiv);
     }
 
     projectCardsDiv.replaceChildren();
 
-    projects.forEach((project) => {
+    for (let projIndex = 0; projIndex < projectLimit; projIndex++) {
 
         const {
             type,
-            projImg,
+            projImgs,
             projTitle,
             projStart,
             projFinish
-        } = project 
+        } = projects[projIndex] as Project;
 
 
 
         const projectCardA = document.createElement("a");
+        const projectInfo = document.createElement("div");
         const projectTypeP = document.createElement("p");
         const projectImg = document.createElement("img");
         const projectTitleh3 = document.createElement("h3");
@@ -296,34 +298,24 @@ const displayProjects = (projects: Project[]) => {
 
         projectTypeP.textContent = type.join(", ");
 
-        projectImg.src = projImg;
+        projectImg.src = (projImgs[0] && projImgs[0] !== "#") ? projImgs[0] : "https://placehold.net/400x400.png";
+        projectImg.className = "proj-img";
 
         projectTitleh3.textContent = projTitle;
 
         projectIntervalP.textContent = `${projStart} - ${projFinish}`
 
         
-
-        projectCardA.appendChild(projectTypeP);
         projectCardA.appendChild(projectImg);
+        projectCardA.appendChild(projectTypeP);
         projectCardA.appendChild(projectTitleh3);
         projectCardA.appendChild(projectIntervalP);
         
         projectCardsDiv.appendChild(projectCardA);
 
-    });
+    }
 
 
 }
 
-const projectFilterId = "project-type";
-displayFilter(projects, "Projects by type", projectFilterId, projectContainerDiv as HTMLDivElement);
-displayProjects(projects);
-
-const projectFilterSelect = document.getElementById(projectFilterId);
-
-
-projectFilterSelect?.addEventListener('change', (event) => {
-    const filteredArray = filterEvent(event, projects);
-    displayProjects(filteredArray);
-});
+displayProjects(projects, 3);

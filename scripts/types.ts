@@ -1,7 +1,7 @@
 export interface Project {
     type: string[];
     projLink: string;
-    projImg: string;
+    projImgs: string[];
     projTitle: string;
     projStart: string;
     projFinish: string;

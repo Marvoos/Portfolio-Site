@@ -3,12 +3,17 @@
     --surface: #111827;
     --txt: #F3F4F6;
     --bg-color: #0B1220;
+    --shadow: #070c15;
 
     --grid-template-size: 12;
     --standard-border-size: 0.2rem;
     --standard-border-radius: 1rem;
 
-    --standard-shadow: 0rem 0.125rem 0 #33333343;
+    --standard-shadow: 0.25rem 0.25rem 0 var(--shadow);
+
+    --margin-sm: 0.5rem;
+    --margin-md: 1rem;
+    --margin-lg: 2rem;
 }
 
 * {
@@ -166,6 +171,7 @@ nav a:hover:not(.current-page) {
     width: 15%;
     height: 60%;
     object-fit: cover;
+    background-color: var(--primary);
 }
 
 .desc-title {
@@ -275,6 +281,11 @@ nav a:hover:not(.current-page) {
     justify-self: center;
 }
 
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+}
+
 .half-col {
     grid-column: span calc(var(--grid-template-size) / 2);
 }
@@ -322,22 +333,11 @@ nav a:hover:not(.current-page) {
 }
 
 .button {
-    background: none;
-    border: solid var(--standard-border-size) var(--gunMetal);
-    padding: 0.25rem 2rem;
-    margin-top: 0.5rem;
-    cursor: pointer;
-    outline: none;
-    color: var(--surface);
-    font-weight: 800;
-    text-decoration: none;
-    background-color: var(--gunMetal);
-    max-width: fit-content;
+    
 }
 
 .button:hover {
-    background-color: var(--surface);
-    color: var(--gunMetal);
+
 }
 
 @keyframes card-hover-anim {
@@ -352,4 +352,46 @@ nav a:hover:not(.current-page) {
 
 .prevent-scroll {
     overflow-y: hidden;
+}
+
+a.card {
+    text-decoration: none;
+    transition: transform 0.5s ease;
+    position: relative;
+}
+
+.proj-img {
+    position: relative;
+    width: 100%;
+}
+
+a.card:hover {
+    transform: translateY(-2%);
+}
+
+.card {
+    background-color: var(--surface);
+    margin: var(--margin-lg);
+    padding: var(--margin-lg);
+    box-shadow: var(--standard-shadow);
+}
+
+
+.card:hover::before {
+    animation-name: card-hover;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes card-hover {
+    from {
+        background-color: var(--primary);
+        height: 0%;
+    }
+
+    to {
+
+        background-color: var(--primary);
+        height: 100%;
+    }
 }
