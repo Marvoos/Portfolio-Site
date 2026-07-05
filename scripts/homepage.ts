@@ -109,6 +109,9 @@ const displayJobs = (jobArray: Job[]) => {
                 skillsDeveloped } = job;
         
         // Make the corresponding elements for each property.
+        const cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+
         // Job type needs a paragraph element
         const typeP = document.createElement("p");
 
@@ -129,6 +132,7 @@ const displayJobs = (jobArray: Job[]) => {
 
         // The skills developed requires an unordered list element
         const skillsDevUl = document.createElement("ul");
+        skillsDevUl.classList.add("list");
 
         const skillsP = document.createElement("p");
 
@@ -153,16 +157,17 @@ const displayJobs = (jobArray: Job[]) => {
         
 
         // Append children  sequentially
-        jobCard.appendChild(typeP);
-        jobCard.appendChild(titleh3);
-        jobCard.appendChild(compNameh5);
-        jobCard.appendChild(dateDisplayP);
-        jobCard.appendChild(timeInPosP);
-        jobCard.appendChild(jobDescP);
-        jobCard.appendChild(skillsP);
-        jobCard.appendChild(skillsDevUl);
+        cardBody.appendChild(typeP);
+        cardBody.appendChild(titleh3);
+        cardBody.appendChild(compNameh5);
+        cardBody.appendChild(dateDisplayP);
+        cardBody.appendChild(timeInPosP);
+        cardBody.appendChild(jobDescP);
+        cardBody.appendChild(skillsP);
+        cardBody.appendChild(skillsDevUl);
 
         // Retreive every job and their index within the list of jobs from main.js
+        jobCard.appendChild(cardBody);
         jobCardsDiv?.appendChild(jobCard);
         
     })
@@ -193,12 +198,21 @@ const educationDisplay = (education: Education[]) => {
         const educationCard = document.createElement('div');
         educationCard.className = "card";
 
+        const cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+
         // Create all elements within this card
         const degreeTypeP = document.createElement('p');
+
         const degreeNameh3 = document.createElement('h3');
+
         const datesDisplayP = document.createElement('p');
+
         const timeInPosP = document.createElement('p');
+
         const degFocusUl = document.createElement("ul");
+        degFocusUl.classList.add("list");
+
         const focusP = document.createElement("p");
 
         // Set elements to their corresponding text
@@ -217,13 +231,14 @@ const educationDisplay = (education: Education[]) => {
 
         
         // Append each element onto the card container
-        educationCard.appendChild(degreeTypeP);
-        educationCard.appendChild(degreeNameh3);
-        educationCard.appendChild(datesDisplayP);
-        educationCard.appendChild(timeInPosP);
-        educationCard.appendChild(focusP);
-        educationCard.appendChild(degFocusUl);
+        cardBody.appendChild(degreeTypeP);
+        cardBody.appendChild(degreeNameh3);
+        cardBody.appendChild(datesDisplayP);
+        cardBody.appendChild(timeInPosP);
+        cardBody.appendChild(focusP);
+        cardBody.appendChild(degFocusUl);
 
+        educationCard.appendChild(cardBody);
         // Append the card onto the div container for education cards
         educationExperience?.appendChild(educationCard);
     });
@@ -296,6 +311,8 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
         projectCardA.href = `projects/index.html?${encodeURI(projTitle)}`;
         projectCardA.className = "card";
 
+        projectInfo.classList.add("card-body");
+
         projectTypeP.textContent = type.join(", ");
 
         projectImg.src = (projImgs[0] && projImgs[0] !== "#") ? projImgs[0] : "https://placehold.net/400x400.png";
@@ -307,11 +324,13 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
 
         
         projectCardA.appendChild(projectImg);
-        projectCardA.appendChild(projectTypeP);
-        projectCardA.appendChild(projectTitleh3);
-        projectCardA.appendChild(projectIntervalP);
+        projectInfo.appendChild(projectTypeP);
+        projectInfo.appendChild(projectTitleh3);
+        projectInfo.appendChild(projectIntervalP);
+        projectCardA.appendChild(projectInfo);
         
         projectCardsDiv.appendChild(projectCardA);
+
 
     }
 

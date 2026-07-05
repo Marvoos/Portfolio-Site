@@ -1,3 +1,8 @@
+export interface skills {
+    icon: string;
+    skillName: string;
+}
+
 export interface Project {
     type: string[];
     projLink: string;
