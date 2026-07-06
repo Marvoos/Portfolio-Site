@@ -52,6 +52,9 @@ const displayFilter = (array: Array<any>, selectText: String, idName: String, co
     // Build a functional JS filter
     const arrayTypes = getUniqueTypes(array);
 
+    const filterField = document.createElement("div");
+    filterField.classList.add("flex-display", "flex-column");
+
     // Create the label for the input
     const labelSelect = document.createElement("label");
     labelSelect.textContent = `Filter ${selectText}: `;
@@ -62,6 +65,8 @@ const displayFilter = (array: Array<any>, selectText: String, idName: String, co
     // Assign id and name 
     selectElement.id = `${idName}`;
     selectElement.name = `${idName}`; 
+
+    selectElement.classList.add('filter-input');
 
     const typeAll = document.createElement("option");
     typeAll.value = "All";
@@ -74,8 +79,10 @@ const displayFilter = (array: Array<any>, selectText: String, idName: String, co
         typeOption.textContent = type;
         selectElement.appendChild(typeOption);
     });
-    container?.appendChild(labelSelect);
-    container?.appendChild(selectElement);
+
+    filterField?.appendChild(labelSelect);
+    filterField?.appendChild(selectElement);
+    container?.appendChild(filterField);
 
 }
 
@@ -114,6 +121,7 @@ const displayJobs = (jobArray: Job[]) => {
 
         // Job type needs a paragraph element
         const typeP = document.createElement("p");
+        typeP.classList.add("type");
 
         // The job title needs a heading element
         const titleh3 = document.createElement("h3");
@@ -203,6 +211,7 @@ const educationDisplay = (education: Education[]) => {
 
         // Create all elements within this card
         const degreeTypeP = document.createElement('p');
+        degreeTypeP.classList.add("type");
 
         const degreeNameh3 = document.createElement('h3');
 
@@ -302,14 +311,17 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
 
 
         const projectCardA = document.createElement("a");
+
+
         const projectInfo = document.createElement("div");
         const projectTypeP = document.createElement("p");
+        projectTypeP.classList.add("type");
         const projectImg = document.createElement("img");
         const projectTitleh3 = document.createElement("h3");
         const projectIntervalP = document.createElement("p");
 
         projectCardA.href = `projects/index.html?${encodeURI(projTitle)}`;
-        projectCardA.className = "card";
+        projectCardA.classList.add("card", "project-card");
 
         projectInfo.classList.add("card-body");
 
