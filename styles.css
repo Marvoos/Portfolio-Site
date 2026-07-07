@@ -261,26 +261,21 @@ nav a:hover:not(.current-page) {
     align-items: center;
     max-height: fit-content;
     overflow-y: hidden;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 .project-card .proj-img {
-    object-fit: cover;
     width: 100%;
-    height: 0%;
-    
+    height: 50%;
+    object-fit: cover;
 }
 
 .project-card {
-    flex: 0 0 15rem; 
-    max-width: 15rem;
-    max-height: 20rem;
+    flex: 0 0 20rem; 
+    width: 20rem;
+    height: 20rem;
     margin: var(--margin-md);
     border: solid var(--standard-border-size) var(--surface);
-}
-
-.project-card .card-body {
-    padding: var(--margin-sm);
     background-color: var(--surface);
 }
 
@@ -297,11 +292,18 @@ nav a:hover:not(.current-page) {
 }
 
 .button {
-    
+    text-decoration: none;
+    background-color:  var(--primary);
+    padding:  var(--margin-sm) var(--margin-lg);
+    border-radius: var(--standard-border-radius);
+    color: var(--surface);
+    margin: var(--margin-lg) var(--margin-sm);
 }
 
 .button:hover {
-
+    color: var(--primary);
+    background-color: var(--surface);
+    outline: solid 1px var(--primary);
 }
 
 .filter-input {
@@ -328,7 +330,8 @@ nav a:hover:not(.current-page) {
 
 .card:not(.project-card) {
     background-color: var(--surface);
-    margin: var(--margin-lg);
+    margin-top: var(--margin-lg);
+    margin-bottom: var(--margin-lg);
 }
 
 .card-body {
@@ -336,13 +339,8 @@ nav a:hover:not(.current-page) {
 }
 
 a.card {
-    text-decoration: none;
-    transition: transform 0.5s ease;
+    text-decoration: none;  
     position: relative;
     padding: none;
 
-}
-
-a.card:hover {
-    transform: translateY(-0.5rem);
 }

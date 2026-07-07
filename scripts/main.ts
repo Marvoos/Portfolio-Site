@@ -51,7 +51,7 @@ export const projects: Project[] = [
         projImgs: ["#"],
         projTitle: "Food Ordering & Delivery Web Application (PHP + MariaDB)",
         projStart: getMonthYearDate(new Date("2026-01-07")),
-        projFinish: getMonthYearDate(new Date("2026-03-36")),
+        projFinish: getMonthYearDate(new Date("2026-03-26")),
         projLanguages: ["HTML", "CSS", "JavaScript", "PHP", "MariaDB", "MySQL"],
         projDesc: "Built a full-stack food ordering web application that simulates a real-world delivery platform, allowing users to browse items, place orders, and interact with a backend database system. The application includes secure server-side logic for handling data, user actions, and database transactions using PHP and MariaDB, with a responsive frontend built in HTML, CSS, and JavaScript.",
         projFeatures: ["Dynamic food ordering interface with interactive UI",
@@ -90,8 +90,7 @@ export const projects: Project[] = [
             "Developed with the backend in mind. Uses TypeScript to separate the data from logic and dynamically creates filters using data.",
             "Includes projects, experience, education, resume, and contact information if needed."
         ]
-        
-   },
+   }
 
    
 ]

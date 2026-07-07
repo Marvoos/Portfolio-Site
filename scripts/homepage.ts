@@ -288,6 +288,9 @@ const projectContainerDiv = document.getElementById("projects-div-container");
 
 const displayProjects = (projects: Project[], projectLimit: number) => {
     let projectCardsDiv = document.getElementById("project-cards-div");
+    if (projectLimit > projects.length) {
+        projectLimit = projects.length;
+    }
 
     if (!projectCardsDiv) {
         projectCardsDiv = document.createElement("div");
@@ -297,10 +300,10 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
     }
 
     projectCardsDiv.replaceChildren();
-
+    
     for (let projIndex = 0; projIndex < projectLimit; projIndex++) {
 
-        const {
+        let {
             type,
             projImgs,
             projTitle,
@@ -308,6 +311,10 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
             projFinish
         } = projects[projIndex] as Project;
 
+
+        if (projTitle.length > 40) {
+            projTitle = `${projTitle.slice(0, 40)}...`;
+        }
 
 
         const projectCardA = document.createElement("a");
@@ -349,4 +356,33 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
 
 }
 
-displayProjects(projects, 3);
+displayProjects(projects, 10);
+
+const carouselContainer = document.getElementById("project-cards-div") as HTMLDivElement;
+const carouselItems = document.querySelectorAll(".project-card");
+
+const updateOpacity = () => {
+    
+    const carouselCentre = carouselContainer?.getBoundingClientRect().left + (carouselContainer?.offsetWidth / 2);
+
+    carouselItems.forEach((item) => {
+        const itemRect = item.getBoundingClientRect();
+
+        const itemCentre = itemRect.left + (itemRect.width / 2);
+
+        const distanceFromCentre = Math.abs(carouselCentre - itemCentre);
+
+        const maxDistance = 800;
+        const opacity = Math.max(0.2, 1 - (distanceFromCentre / maxDistance));
+
+        (item as HTMLElement).style.opacity = `${opacity}`;
+        (item as HTMLElement).style.transform = `scale(${Math.max(0.85, opacity)})`;
+
+    });
+
+}
+
+
+carouselContainer?.addEventListener('scroll', updateOpacity);
+window.addEventListener('resize', updateOpacity);
+updateOpacity();
