@@ -53,7 +53,7 @@ const displayFilter = (array: Array<any>, selectText: String, idName: String, co
     const arrayTypes = getUniqueTypes(array);
 
     const filterField = document.createElement("div");
-    filterField.classList.add("flex-display", "flex-column");
+    filterField.classList.add("flex-display", "flex-column", "filter-field");
 
     // Create the label for the input
     const labelSelect = document.createElement("label");
@@ -285,11 +285,16 @@ jobFilterSelect?.addEventListener('change', (event) => {
  */
 
 const projectContainerDiv = document.getElementById("projects-div-container"); 
+let currentProjCard: number = 0;
 
 const displayProjects = (projects: Project[], projectLimit: number) => {
     let projectCardsDiv = document.getElementById("project-cards-div");
     if (projectLimit > projects.length) {
         projectLimit = projects.length;
+        currentProjCard = Math.ceil(projects.length / 2) - 1;
+    }
+    else {
+        currentProjCard = Math.ceil(projectLimit / 2) - 1;
     }
 
     if (!projectCardsDiv) {
@@ -354,35 +359,61 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
     }
 
 
+
+
 }
 
 displayProjects(projects, 10);
+const projCards : NodeList = document.querySelectorAll(".project-card");
 
-const carouselContainer = document.getElementById("project-cards-div") as HTMLDivElement;
-const carouselItems = document.querySelectorAll(".project-card");
-
-const updateOpacity = () => {
+const updateProjectDisplay = () => {
     
-    const carouselCentre = carouselContainer?.getBoundingClientRect().left + (carouselContainer?.offsetWidth / 2);
+    if (projCards) {
+        for (let i = 0; i < projCards.length ; i++) {
+            (projCards[i] as HTMLElement).classList.add("proj-oov");
+            (projCards[i] as HTMLElement).classList.remove("proj-prev");
+            (projCards[i] as HTMLElement).classList.remove("proj-next");
+            (projCards[i] as HTMLElement).classList.remove("proj-active");
+        }
 
-    carouselItems.forEach((item) => {
-        const itemRect = item.getBoundingClientRect();
+        (projCards[currentProjCard] as HTMLElement).classList.remove("proj-prev");
+        (projCards[currentProjCard] as HTMLElement).classList.remove("proj-next");
+        (projCards[currentProjCard] as HTMLElement).classList.add("proj-active");
 
-        const itemCentre = itemRect.left + (itemRect.width / 2);
+        let nextCard = currentProjCard + 1;
+        let prevCard = currentProjCard - 1;
+        if (projCards[prevCard]) {
+            (projCards[prevCard] as HTMLElement).classList.remove("proj-oov", "proj-prev", "proj-next");
+            (projCards[prevCard] as HTMLElement).classList.add("proj-prev");
+        }
+        if (projCards[nextCard]) {
+            (projCards[nextCard] as HTMLElement).classList.remove("proj-oov", "proj-prev", "proj-next");
+            (projCards[nextCard] as HTMLElement).classList.add("proj-next");
+        }
 
-        const distanceFromCentre = Math.abs(carouselCentre - itemCentre);
-
-        const maxDistance = 800;
-        const opacity = Math.max(0.2, 1 - (distanceFromCentre / maxDistance));
-
-        (item as HTMLElement).style.opacity = `${opacity}`;
-        (item as HTMLElement).style.transform = `scale(${Math.max(0.85, opacity)})`;
-
-    });
-
+    }
+    else {
+        return;
+    }
 }
 
+updateProjectDisplay();
 
-carouselContainer?.addEventListener('scroll', updateOpacity);
-window.addEventListener('resize', updateOpacity);
-updateOpacity();
+const projLeftBtn = document.getElementById("btn-left");
+const projRightBtn = document.getElementById("btn-right");
+
+projLeftBtn?.addEventListener('click', () => {
+    if (currentProjCard > 0) {
+        currentProjCard -= 1;
+    }
+    updateProjectDisplay();
+
+});
+
+projRightBtn?.addEventListener('click', () => {
+    if (currentProjCard < projCards.length - 1) {
+        currentProjCard += 1;
+    }
+    updateProjectDisplay();
+});
+

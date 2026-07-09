@@ -1,7 +1,7 @@
 import type { Job } from './types';
 import type { Education } from './types';
 import type { Project } from './types';
-
+import type { Skill } from './types';
 
 export const isValidDate = (date: Date) : boolean => {
     return !isNaN(date.getTime());
@@ -43,6 +43,32 @@ export const getMonthYearDate = (startDate: Date): string => {
     const startYear = startDate.getFullYear();
     return `${monthKey[startMonth]} ${startYear}`;
 }
+
+export const languages: Skill[] = [
+    {
+        icon: '',
+        skillName: "HTMl",
+        searchName: "html",
+    },
+    {
+        icon: '',
+        skillName: "CSS",
+        searchName: "css",
+    },
+    {
+        icon: '',
+        skillName: "JavaScript",
+        searchName: "js",
+    },
+    {
+        icon: '',
+        skillName: "TypeScript",
+        searchName: "html",
+    },
+
+];
+
+export const frameworks: Skill[] = [];
 
 export const projects: Project[] = [
    {
@@ -90,8 +116,7 @@ export const projects: Project[] = [
             "Developed with the backend in mind. Uses TypeScript to separate the data from logic and dynamically creates filters using data.",
             "Includes projects, experience, education, resume, and contact information if needed."
         ]
-   }
-
+   }  
    
 ]
 

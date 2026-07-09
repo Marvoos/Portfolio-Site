@@ -1,6 +1,7 @@
-export interface skills {
+export interface Skill {
     icon: string;
     skillName: string;
+    searchName: string;
 }
 
 export interface Project {
