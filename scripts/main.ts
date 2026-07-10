@@ -44,32 +44,59 @@ export const getMonthYearDate = (startDate: Date): string => {
     return `${monthKey[startMonth]} ${startYear}`;
 }
 
-export const languages: Skill[] = [
-    {
-        icon: '',
-        skillName: "HTMl",
-        searchName: "html",
-    },
-    {
-        icon: '',
-        skillName: "CSS",
-        searchName: "css",
-    },
-    {
-        icon: '',
-        skillName: "JavaScript",
-        searchName: "js",
-    },
-    {
-        icon: '',
-        skillName: "TypeScript",
-        searchName: "html",
-    },
+export const skills : { [key: string]: Skill[] } = {
+        languages: [
+        {
+            icon: 'fa-solid fa-code',
+            skillName: "HTMl",
+            searchName: "html",
+        },
+        {
+            icon: 'fa-brands fa-css',
+            skillName: "CSS",
+            searchName: "css",
+        },
+        {
+            icon: 'fa-brands fa-square-js',
+            skillName: "JavaScript",
+            searchName: "js",
+        },
+        {
+            icon: 'fa-brands fa-typescript',
+            skillName: "TypeScript",
+            searchName: "html",
+        },
+        {
+            icon: 'fa-brands fa-php',
+            skillName: "PHP",
+            searchName: "php",
+        },
+        {
+            icon: 'fa-solid fa-database',
+            skillName: "SQL",
+            searchName: "sql",
+        }
 
-];
+    ],
 
-export const frameworks: Skill[] = [];
-
+    frameworks: [
+        {
+            icon: 'fa-brands fa-bootstrap',
+            skillName: "Bootstrap",
+            searchName: "bootstrap",
+        },
+        {
+            icon: 'fa-brands fa-react',
+            skillName: "ReactJs",
+            searchName: "react", 
+        },
+        {
+            icon: 'fa-brands fa-node-js',
+            skillName: "Nodejs",
+            searchName: "node",
+        },
+    ]
+}
 export const projects: Project[] = [
    {
         type: ["Web Development", "Full Stack"],

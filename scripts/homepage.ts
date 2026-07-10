@@ -11,8 +11,8 @@ import type { Education } from './types';
 import { projects } from './main';
 import type { Project } from './types';
 
-
-
+import { skills } from './main';
+import type { Skill } from './types';
 
 // Retrieve the outer container div to put the jobs inside.
 const jobCardsDivContainer = document.getElementById('jobs');
@@ -417,3 +417,59 @@ projRightBtn?.addEventListener('click', () => {
     updateProjectDisplay();
 });
 
+/*
+ *
+ *
+ * Skills section
+ * 
+ */
+
+const techSkillsDiv = document.getElementById("technical-skills-container");
+const techSkillsList = () => {
+    const skillTypes : string[] = Object.keys(skills);
+    skillTypes.forEach((skillType) => {
+        if (skills[skillType]) {
+            const skillDiv = document.createElement("div");
+            const skillh2 = document.createElement("h2");
+            skillh2.classList.add("title");
+            skillh2.textContent = `${skillType}`;
+
+            skillDiv.appendChild(skillh2);
+
+            skillDiv.classList.add("skill-card-container");
+
+            skills[skillType].forEach((skill) => {
+                const {
+                    icon,
+                    skillName,
+                    searchName
+                } = skill;
+
+
+                const iconClassArr = icon.split(" ");
+                const skillCard = document.createElement("div");
+            
+                const skillCardIcon = document.createElement("i");
+                const skillCardBody = document.createElement("div");
+                const skillNameA = document.createElement("a");
+                
+                skillCardIcon.classList.add(...iconClassArr);
+                skillNameA.textContent = skillName;
+                skillNameA.href = `./projects/index.html?skill=${searchName}`;
+
+
+                skillCard.appendChild(skillCardIcon);
+                skillCardBody.appendChild(skillNameA);
+                skillCard.appendChild(skillCardBody);
+                skillDiv.appendChild(skillCard);
+
+            });
+
+            techSkillsDiv?.appendChild(skillDiv);
+            
+        }
+        
+    });
+}
+
+techSkillsList();   
