@@ -332,7 +332,7 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
         const projectTitleh3 = document.createElement("h3");
         const projectIntervalP = document.createElement("p");
 
-        projectCardA.href = `projects/index.html?${encodeURI(projTitle)}`;
+        projectCardA.href = `projects/index.html?project-name=${encodeURI(projTitle)}`;
         projectCardA.classList.add("card", "project-card");
 
         projectInfo.classList.add("card-body");
@@ -434,7 +434,7 @@ const techSkillsList = () => {
             skillh2.classList.add("title");
             skillh2.textContent = `${skillType}`;
 
-            skillDiv.appendChild(skillh2);
+            techSkillsDiv?.appendChild(skillh2);
 
             skillDiv.classList.add("skill-card-container");
 
@@ -447,21 +447,20 @@ const techSkillsList = () => {
 
 
                 const iconClassArr = icon.split(" ");
-                const skillCard = document.createElement("div");
-            
+                const skillCardA = document.createElement("a");
+                skillCardA.classList.add("flex-display", "flex-justify-start", "flex-align-centre", "skill-card");
                 const skillCardIcon = document.createElement("i");
                 const skillCardBody = document.createElement("div");
-                const skillNameA = document.createElement("a");
+                const skillNameP = document.createElement("p");
                 
                 skillCardIcon.classList.add(...iconClassArr);
-                skillNameA.textContent = skillName;
-                skillNameA.href = `./projects/index.html?skill=${searchName}`;
+                skillNameP.textContent = skillName;
+                skillCardA.href = `./projects/index.html?skill=${searchName}`;
 
-
-                skillCard.appendChild(skillCardIcon);
-                skillCardBody.appendChild(skillNameA);
-                skillCard.appendChild(skillCardBody);
-                skillDiv.appendChild(skillCard);
+                skillCardA.appendChild(skillCardIcon);
+                skillCardBody.appendChild(skillNameP);
+                skillCardA.appendChild(skillCardBody);
+                skillDiv.appendChild(skillCardA);
 
             });
 

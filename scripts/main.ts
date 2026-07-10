@@ -48,7 +48,7 @@ export const skills : { [key: string]: Skill[] } = {
         languages: [
         {
             icon: 'fa-solid fa-code',
-            skillName: "HTMl",
+            skillName: "HTML",
             searchName: "html",
         },
         {
