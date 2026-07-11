@@ -431,7 +431,7 @@ const techSkillsList = () => {
         if (skills[skillType]) {
             const skillDiv = document.createElement("div");
             const skillh2 = document.createElement("h2");
-            skillh2.classList.add("title");
+            skillh2.classList.add("subtitle", "title");
             skillh2.textContent = `${skillType}`;
 
             techSkillsDiv?.appendChild(skillh2);

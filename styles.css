@@ -1,41 +1,61 @@
+
+/*Standard variables - dark mode*/
 :root {
     --primary: #10B981;
     --surface: #111827;
     --txt: #F3F4F6;
     --bg-color: #0B1220;
-    --shadow: #070c15;
+    --shadow: 0.1rem 0.1rem 0.25rem #070c15;
 
     --standard-border-size: 0.2rem;
     --standard-border-radius: var(--margin-md);
-
-    --standard-shadow: 0.125rem 0.125rem 0.1rem var(--shadow);
 
     --margin-sm: 0.5rem;
     --margin-md: 1rem;
     --margin-lg: 2rem;
 }
 
+
+/*
+ * 
+ *
+ * Standard element styling
+ */
+
+/*Reset all element spacing*/
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
-html {
-    overflow-x: hidden;
-}
-
+/*Standard small text font - Using gill sans*/
 p, label, li, a, h4, h5, h6 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 } 
 
+/*Standard large text font - Lucida sans*/
 h1, h2, h3 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+/*Standard text colour*/
 p, label, li, a, h1, h2, h3, h4, h5, h6 {
     color: var(--txt);
 }
+
+/*
+ *
+ *
+ * End of element styling
+ */
+
+
+ /*
+ *
+ *
+ * Beginning of standard classes for ease of access
+ */
 
 .bg {
     background-color: var(--bg-color);
@@ -73,118 +93,14 @@ p, label, li, a, h1, h2, h3, h4, h5, h6 {
     list-style: none;
 }
 
-.nav-ul {
-    justify-content: space-around;
-    list-style: none;
-
+.list {
+    margin-left: 3rem;
 }
 
-.nav-links {
-    width: 40%;
-}
-
-.nav-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 1.5rem 2rem;
-    font-weight: 700;
-    height: 0.5rem;
-    margin: var(--margin-md) 0 0.5rem 0;
-    border: solid var(--surface) var(--standard-border-size);
-}
-
-nav a:hover + hr:not(.current-page + hr) {
-    display: block;
-    animation: nav-link-hover 0.5s ease forwards;
-}
-
-nav a:hover:not(.current-page) {
-    animation: nav-link-background 0.5s ease forwards;
-}
-
-@keyframes nav-link-background {
-    from {
-        background-colOR: var(--bg-color);
-    }
-    to {
-        background-color: var(--surface);
-        
-    }
-}
-
-@keyframes nav-link-hover {
-    from {
-        background-color: var(--bg-color);
-        width: 0%;
-    }
-    to {
-        background-color: var(--surface);
-        width: 100%;
-    }
-}
-
-.nav-link + hr {
-    display: none;
-    background-color: var(--primary);
-    width: 100%;
-    height: 0.25rem;
-    border: none;
-}
-
-.current-page {
-    color: var(--bg-color);
-    background-color: var(--primary); 
-    
-}
-
-.current-page + hr {
-    display: block;
-}
-
-
-.jumbo-sec {
-    width: 100%;
-    height: 35rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: var(--margin-md);
-}
-
+/*Used to highlight text*/
 .highlight-txt {
     color: var(--primary);
     font-weight: 600;
-}
-
-.portfolio-desc {
-    width: 60%;
-    height: 90%;
-    background-color: var(--surface);
-    margin-right: 0.5rem;
-    padding: var(--margin-md);
-}
-
-.jumbo-img {
-    width: 15%;
-    height: 90%;
-    object-fit: cover;
-    background-color: var(--primary);
-}
-
-.desc-title {
-    font-size: 3rem;
-    text-transform: uppercase;
-}
-
-.desc-subtitle {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: center;
-
 }
 
 .title {
@@ -199,6 +115,229 @@ nav a:hover:not(.current-page) {
     border-bottom: solid 0.5rem var(--darkSlate-hover);
 }
 
+/*Used to denote the type of experience and project*/
+.type {
+    width: fit-content;
+    margin-bottom: var(--margin-sm);
+    padding: var(--margin-sm) var(--margin-md);
+    background-color: var(--primary);
+    color: var(--surface);
+    font-size: 0.9rem;
+}
+
+/*Used to have spacing consistency between sections*/
+.experience-containers {
+    padding: var(--margin-md);
+    width: 75vw;
+    justify-self: center;
+}
+
+.button {
+    text-decoration: none;
+    background-color:  var(--primary);
+    padding:  var(--margin-sm) var(--margin-lg);
+    border-radius: var(--standard-border-radius);
+    color: var(--surface);
+    margin: var(--margin-lg) var(--margin-sm);
+    transition: all 0.5s ease;
+}
+
+.link {
+    font-size: 1rem;
+    color: var(--primary);
+    text-decoration: underline;
+    text-transform: capitalize;
+}
+
+.link:hover {
+    color: var(--txt);
+}
+
+.title-div {
+    margin-left: var(--margin-lg);
+    margin-top: var(--margin-md);
+    margin-bottom: var(--margin-md);
+
+}
+
+.title-div h1 {
+    letter-spacing: 0.3rem;
+}
+
+.button:hover {
+    color: var(--primary);
+    background-color: var(--surface);
+    outline: solid 1px var(--primary);
+}
+
+.filter-field {
+    margin-top: var(--margin-md);
+}
+
+
+.filter-input {
+    background-color: var(--bg-color);
+    color: var(--txt);
+    border: solid var(--standard-border-size) var(--surface);
+    outline: none;
+    padding: var(--margin-sm);
+}
+
+
+
+ /*
+ *
+ *
+ * End of standard classes
+ */
+
+ /*
+ *
+ *
+ * Beginning of navbar classes
+ */
+
+/*Navigation unorder list style*/
+.nav-ul {
+    justify-content: space-around;
+    list-style: none;
+}
+
+/*Nav links container*/
+.nav-links {
+    width: 40%;
+}
+
+/*Individual navigation link*/
+.nav-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 1.5rem 2rem;
+    font-weight: 700;
+    height: 0.5rem;
+    margin: var(--margin-md) 0 0.5rem 0;
+    border: solid var(--surface) var(--standard-border-size);
+}
+
+/*Select the pseudoclass hover on the nav-links for all horizontal rules which don't have a sibling with the class current page*/
+.nav-link:hover + hr:not(.current-page + hr) {
+    display: block;
+    animation: nav-link-hover 0.5s ease forwards;
+}
+
+/*Select the pseudoclass hover for all nav-links that don't contain the current-page class*/
+.nav-link:hover:not(.current-page) {
+    animation: nav-link-background 0.5s ease forwards;
+}
+
+/*An animation to change the colour from the background to a lighter colour called surface*/
+@keyframes nav-link-background {
+    from {
+        background-color: var(--bg-color);
+    }
+    to {
+        background-color: var(--surface);
+        
+    }
+}
+
+/*An animation to change the change the colour from the background to a lighter colour and increase the width from 0% to the entire width of the nav-link*/
+@keyframes nav-link-hover {
+    from {
+        background-color: var(--bg-color);
+        width: 0%;
+    }
+    to {
+        background-color: var(--surface);
+        width: 100%;
+    }
+}
+
+/*Select the horizontal rules with a nav-link sibling*/
+.nav-link + hr {
+    display: none;
+    background-color: var(--primary);
+    width: 100%;
+    height: 0.25rem;
+    border: none;
+}
+
+/*Change the colour and background colour of the selected nav-link*/
+.current-page {
+    color: var(--bg-color);
+    background-color: var(--primary); 
+    
+}
+
+/*Display the horizontal rule under the nav link if the nav-links also contains the current page class*/
+.current-page + hr {
+    display: block;
+}
+
+
+ /*
+ *
+ *
+ * End of navbar classes
+ */
+
+ 
+ /*
+ *
+ *
+ * Beginning of Jumbo/Hero classes
+ */
+
+/*The jumbo-sec class corresponds to the divider encompassing the width and a certain height of the viewport*/
+.jumbo-sec {
+    width: 100%;
+    height: 35rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: var(--margin-md);
+}
+
+
+/*The rectangular graphic containing the summary and links to socials*/
+.portfolio-desc {
+    width: 60%;
+    height: 90%;
+    background-color: var(--surface);
+    margin-right: 0.5rem;
+    padding: var(--margin-md);
+    box-shadow: var(--shadow);
+}
+
+/*The image of me beside the summary*/
+.jumbo-img {
+    width: 15%;
+    height: 90%;
+    object-fit: cover;
+    background-color: var(--primary);
+    box-shadow: var(--shadow);
+
+}
+
+/*The description title within the description container*/
+.desc-title {
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+/*The description subtitle which includes the bad and my person title*/
+.desc-subtitle {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+
+}
+
+/*Badge icon, extra graphic beside the subtitle*/
 .badge {
     background-color: var(--primary);
     font-size: var(--margin-md);
@@ -207,6 +346,7 @@ nav a:hover:not(.current-page) {
     color: var(--surface);
 }
 
+/*The unordered list of links*/
 .links-list {
     list-style-type: none;
     display: flex;
@@ -214,6 +354,7 @@ nav a:hover:not(.current-page) {
     justify-content: start;
 }
 
+/*Individual personal links within the list*/
 .personal-links {
     background-color: var(--primary);
     color: var(--bg-color);
@@ -230,10 +371,12 @@ nav a:hover:not(.current-page) {
     
 }
 
+/*Personal links, ensures that there is no margin on the left side of the first link*/
 .personal-links:first-of-type {
     margin-left: 0;
 }
 
+/*A hover effect on personal-links*/
 .personal-links:hover {
     transform: translateY(-5px);
     color: var(--primary);
@@ -242,23 +385,40 @@ nav a:hover:not(.current-page) {
 
 }
 
+
+ /*
+ *
+ *
+ * End of Jumbo/Hero classes
+ */
+
+  /*
+ *
+ *
+ * Beginning of skill cards classes
+ */
+
+/*The container that includes all skill cards of the specific type, displays as a grid*/
 .skill-card-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: var(--margin-md);
 }
 
+/*Styling the individual cards*/
 .skill-card {
     background-color: var(--surface);
     text-decoration: none;
-    outline: solid var(--standard-border-size) var(--primary);
     transition: all 0.2s ease;
+    box-shadow: var(--shadow);
 }
 
+/*Skill card hover effect*/
 .skill-card:hover {
     transform: translateY(-0.25rem) scale(1.025);
 }
 
+/*Styling the skill icon*/
 .skill-card i {
     background-color: var(--primary);
     color: var(--txt);
@@ -270,33 +430,28 @@ nav a:hover:not(.current-page) {
     font-size: 2rem;
 }
 
+/*Styling the skill name*/
 .skill-card p {
     font-size: 1.25rem;
 }
+  /*
+ *
+ *
+ * End of skill cards classes
+ */
 
-.list {
-    margin-left: 3rem;
-}
+  /*
+ *
+ *
+ * Beginning of projects classes
+ */
 
-.type {
-    width: fit-content;
-    margin-bottom: var(--margin-sm);
-    padding: var(--margin-sm) var(--margin-md);
-    background-color: var(--primary);
-    color: var(--surface);
-    font-size: 0.9rem;
-}
-
-.experience-containers {
-    padding: var(--margin-md);
-    width: 75vw;
-    justify-self: center;
-}
-
+/*Outer project container section must be set to relative positioning for arrow buttons*/
 .projects {
     position: relative;
 }
 
+/*Define the overall layout of the section which directly contains the project cards*/
 .project-grid {
     display: flex;
     justify-content: center;
@@ -306,26 +461,39 @@ nav a:hover:not(.current-page) {
     overflow-x: auto;
 }
 
+/*Select the project card and associated image*/
 .project-card .proj-img {
     width: 100%;
     height: 50%;
     object-fit: cover;
 }
 
+/*Select the project card and prevent from flex shrink and grow*/
 .project-card {
     flex: 0 0 20rem; 
     width: 20rem;
     height: 20rem;
     margin: var(--margin-md);
-    border: solid var(--standard-border-size) var(--surface);
     background-color: var(--surface);
     transition: scroll 0.5s ease;
+    box-shadow: var(--shadow);
+
 }
 
-.margin-sm {
-    margin: 0.5rem;
+/*Position the container directly holding the arrow buttons to the centre of the card carousel*/
+.arrow-btns-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--margin-md);
+
 }
 
+/*Style the individual arrow buttons*/
 .arrow-btn {
     display: inline-flex;
     align-items: center;
@@ -340,23 +508,13 @@ nav a:hover:not(.current-page) {
     z-index: 1;
 }
 
-.arrow-btns-container {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 var(--margin-md);
-
-}
-
+/*Class for project out of view*/
 .proj-oov {
     display: none;
     animation: scale-out-of-view 0.3s linear;
 }
 
+/*Animation to prevent issues with visuals when changing the current project card*/
 @keyframes scale-out-of-view {
   0% {
     opacity: 1;
@@ -394,14 +552,14 @@ nav a:hover:not(.current-page) {
   }
 }
 
+/*Class for the active project*/
 .proj-active {
     display: block;
     animation: scaling 0.5s ease;
     
 }
 
-
-
+/*Scales and changes opcaity of project cards when they become active*/
 @keyframes scaling {
     from {
         opacity: 0.5;
@@ -413,66 +571,14 @@ nav a:hover:not(.current-page) {
     }
 }
 
+/*Next and previous project classes*/
 .proj-next, .proj-prev {
     display: block;
     opacity: 0.5;
     transform: scale(0.85);
 }
 
-.margin-md {
-    margin: var(--margin-md);
-}
-
-.margin-lg {
-    margin: 0.5rem;
-}
-
-.button {
-    text-decoration: none;
-    background-color:  var(--primary);
-    padding:  var(--margin-sm) var(--margin-lg);
-    border-radius: var(--standard-border-radius);
-    color: var(--surface);
-    margin: var(--margin-lg) var(--margin-sm);
-    transition: all 0.5s ease;
-}
-
-.link {
-    font-size: 1rem;
-    color: var(--primary);
-    text-decoration: underline;
-    text-transform: capitalize;
-}
-
-.link:hover {
-    color: var(--txt);
-}
-
-.title-div {
-    margin-left: var(--margin-lg);
-    margin-top: var(--margin-md);
-    margin-bottom: var(--margin-md);
-}
-
-.button:hover {
-    color: var(--primary);
-    background-color: var(--surface);
-    outline: solid 1px var(--primary);
-}
-
-.filter-field {
-    margin-top: var(--margin-md);
-}
-
-
-.filter-input {
-    background-color: var(--bg-color);
-    color: var(--txt);
-    border: solid var(--standard-border-size) var(--surface);
-    outline: none;
-    padding: var(--margin-sm);
-}
-
+/*Hover animation for project cards on project page*/
 @keyframes card-hover-anim {
     25% {
         outline: solid 0.3rem var(--surface);
@@ -482,10 +588,23 @@ nav a:hover:not(.current-page) {
     }
 }
 
+/*
+ *
+ *
+ * End of projects classes
+ */
+
+/*
+ *
+ *
+ * Beginning of other classes
+ */
 .card:not(.project-card) {
     background-color: var(--surface);
     margin-top: var(--margin-lg);
     margin-bottom: var(--margin-lg);
+    outline: solid var(--standard-border-size) var(--primary);
+    box-shadow: var(--shadow);
 }
 
 .card-body {
@@ -496,6 +615,9 @@ a.card {
     text-decoration: none;  
     position: relative;
     padding: none;
-
+    
 }
 
+.subtitle {
+    color: #cacaca;
+}
