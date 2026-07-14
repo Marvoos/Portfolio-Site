@@ -53,7 +53,6 @@ const displayFilter = (array: Array<any>, selectText: String, idName: String, co
     const arrayTypes = getUniqueTypes(array);
 
     const filterField = document.createElement("div");
-    filterField.classList.add("flex-display", "flex-column", "filter-field");
 
     // Create the label for the input
     const labelSelect = document.createElement("label");
@@ -66,7 +65,6 @@ const displayFilter = (array: Array<any>, selectText: String, idName: String, co
     selectElement.id = `${idName}`;
     selectElement.name = `${idName}`; 
 
-    selectElement.classList.add('filter-input');
 
     const typeAll = document.createElement("option");
     typeAll.value = "All";
@@ -104,7 +102,6 @@ const displayJobs = (jobArray: Job[]) => {
         // Create a card container called jobCard, this is the container that each job will go into
         const jobCard = document.createElement("div");
         // Add the card class to this card container
-        jobCard.classList.add('card');
 
         // Destructure each property within the jobs
         const { type,
@@ -117,11 +114,9 @@ const displayJobs = (jobArray: Job[]) => {
         
         // Make the corresponding elements for each property.
         const cardBody = document.createElement("div");
-        cardBody.classList.add("card-body");
 
         // Job type needs a paragraph element
         const typeP = document.createElement("p");
-        typeP.classList.add("type");
 
         // The job title needs a heading element
         const titleh3 = document.createElement("h3");
@@ -204,14 +199,11 @@ const educationDisplay = (education: Education[]) => {
 
         // Create the inital container and set the class to card
         const educationCard = document.createElement('div');
-        educationCard.className = "card";
 
         const cardBody = document.createElement("div");
-        cardBody.classList.add("card-body");
 
         // Create all elements within this card
         const degreeTypeP = document.createElement('p');
-        degreeTypeP.classList.add("type");
 
         const degreeNameh3 = document.createElement('h3');
 
@@ -220,7 +212,6 @@ const educationDisplay = (education: Education[]) => {
         const timeInPosP = document.createElement('p');
 
         const degFocusUl = document.createElement("ul");
-        degFocusUl.classList.add("list");
 
         const focusP = document.createElement("p");
 
@@ -300,7 +291,6 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
     if (!projectCardsDiv) {
         projectCardsDiv = document.createElement("div");
         projectCardsDiv.id = "project-cards-div";
-        projectCardsDiv.classList.add("project-grid");
         projectContainerDiv?.appendChild(projectCardsDiv);
     }
 
@@ -333,9 +323,7 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
         const projectIntervalP = document.createElement("p");
 
         projectCardA.href = `projects/index.html?project-name=${encodeURI(projTitle)}`;
-        projectCardA.classList.add("card", "project-card");
 
-        projectInfo.classList.add("card-body");
 
         projectTypeP.textContent = type.join(", ");
 
@@ -431,12 +419,9 @@ const techSkillsList = () => {
         if (skills[skillType]) {
             const skillDiv = document.createElement("div");
             const skillh2 = document.createElement("h2");
-            skillh2.classList.add("subtitle", "title");
             skillh2.textContent = `${skillType}`;
 
             techSkillsDiv?.appendChild(skillh2);
-
-            skillDiv.classList.add("skill-card-container");
 
             skills[skillType].forEach((skill) => {
                 const {
@@ -448,7 +433,6 @@ const techSkillsList = () => {
 
                 const iconClassArr = icon.split(" ");
                 const skillCardA = document.createElement("a");
-                skillCardA.classList.add("flex-display", "flex-justify-start", "flex-align-centre", "skill-card");
                 const skillCardIcon = document.createElement("i");
                 const skillCardBody = document.createElement("div");
                 const skillNameP = document.createElement("p");
