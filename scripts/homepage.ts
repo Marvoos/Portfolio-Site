@@ -14,74 +14,170 @@ import type { Project } from './types';
 import { skills } from './main';
 import type { Skill } from './types';
 
+import { filterEvent, displayFilter } from './filterFunc';
+
+const techSkillsDiv = document.getElementById("technical-skills-container");
 // Retrieve the outer container div to put the jobs inside.
+
+
+const projectContainerDiv = document.getElementById("projects-div-container"); 
+let currentProjCard: number = 0;
+const projLeftBtn = document.getElementById("btn-left");
+const projRightBtn = document.getElementById("btn-right");
+
 const jobCardsDivContainer = document.getElementById('jobs');
+const jobFilterId = "job-types";
 
 const educationExperience = document.getElementById('education-cards');
 
-// Helper function to retrieve a set of all types. This prevents any duplicates from appearing within the list.
-const getUniqueTypes = (array: Array<any>): string[] => {
-    // Map all job types into a flatmap to convert allTypes to a 1-dimensional array
-    const allTypes: string[] = array.flatMap((item) => item.type);
-    // Convert allTypes array to a set and return this value
-    return [...new Set(allTypes)];
+
+
+const techSkillsList = () => {
+    const skillTypes : string[] = Object.keys(skills);
+    skillTypes.forEach((skillType) => {
+        if (skills[skillType]) {
+            const skillDiv = document.createElement("div");
+            const skillh2 = document.createElement("h2");
+            skillh2.textContent = `${skillType}`;
+
+            techSkillsDiv?.appendChild(skillh2);
+
+            skills[skillType].forEach((skill) => {
+                const {
+                    icon,
+                    skillName,
+                    searchName
+                } = skill;
+
+
+                const iconClassArr = icon.split(" ");
+                const skillCardA = document.createElement("a");
+                const skillCardIcon = document.createElement("i");
+                const skillCardBody = document.createElement("div");
+                const skillNameP = document.createElement("p");
+                
+                skillCardIcon.classList.add(...iconClassArr);
+                skillNameP.textContent = skillName;
+                skillCardA.href = `./projects/index.html?skill=${searchName}`;
+
+                skillCardA.appendChild(skillCardIcon);
+                skillCardBody.appendChild(skillNameP);
+                skillCardA.appendChild(skillCardBody);
+                skillDiv.appendChild(skillCardA);
+
+            });
+
+            techSkillsDiv?.appendChild(skillDiv);
+            
+        }
+        
+    });
 }
 
-const filterEvent = (event: Event, array: Array<any>) : Array<any> => {
-    // Retrieve the target of the filter's change event and cast as an HTMLInputElement
-    const filterTarget = event.currentTarget as HTMLInputElement;
-    // Retrieve the value of the event's target. This takes from the value attribute assigned in the filter creation function
-    const filterValue = filterTarget.value;
 
-    // If the filter value is equal to 'All' or 'all' then don't filter anything
-    if (filterValue.toLowerCase() === "all") {
-        return array;
+
+const displayProjects = (projects: Project[], projectLimit: number) => {
+    let projectCardsDiv = document.getElementById("project-cards-div");
+    if (projectLimit > projects.length) {
+        projectLimit = projects.length;
+        currentProjCard = Math.ceil(projects.length / 2) - 1;
     }
     else {
-        // Otherwise, filter based on job types
-        const filteredArray = array.filter((item: any) => {
-            if (item.type.includes(filterValue)) return true;
-        });
-        return filteredArray;
-        
+        currentProjCard = Math.ceil(projectLimit / 2) - 1;
     }
+
+    if (!projectCardsDiv) {
+        projectCardsDiv = document.createElement("div");
+        projectCardsDiv.id = "project-cards-div";
+        projectContainerDiv?.appendChild(projectCardsDiv);
+    }
+
+    projectCardsDiv.replaceChildren();
+    
+    for (let projIndex = 0; projIndex < projectLimit; projIndex++) {
+
+        let {
+            type,
+            projImgs,
+            projTitle,
+            projStart,
+            projFinish
+        } = projects[projIndex] as Project;
+
+
+        if (projTitle.length > 40) {
+            projTitle = `${projTitle.slice(0, 40)}...`;
+        }
+
+
+        const projectCardA = document.createElement("a");
+        projectCardA.classList.add("project-card");
+
+        const projectInfo = document.createElement("div");
+        const projectTypeP = document.createElement("p");
+        projectTypeP.classList.add("type");
+        const projectImg = document.createElement("img");
+        const projectTitleh3 = document.createElement("h3");
+        const projectIntervalP = document.createElement("p");
+
+        projectCardA.href = `projects/index.html?project-name=${encodeURI(projTitle)}`;
+
+
+        projectTypeP.textContent = type.join(", ");
+
+        projectImg.src = (projImgs[0] && projImgs[0] !== "#") ? projImgs[0] : "https://placehold.net/400x400.png";
+        projectImg.className = "proj-img";
+
+        projectTitleh3.textContent = projTitle;
+
+        projectIntervalP.textContent = `${projStart} - ${projFinish}`
+
+        
+        projectCardA.appendChild(projectImg);
+        projectInfo.appendChild(projectTypeP);
+        projectInfo.appendChild(projectTitleh3);
+        projectInfo.appendChild(projectIntervalP);
+        projectCardA.appendChild(projectInfo);
+        
+        projectCardsDiv.appendChild(projectCardA);
+
+
+    }
+
+
+
+
 }
 
-// Dynamically create a job filter element that retrieves job types and creates a select field
-const displayFilter = (array: Array<any>, selectText: String, idName: String, container: HTMLDivElement) => {
-    // Build a functional JS filter
-    const arrayTypes = getUniqueTypes(array);
+const updateProjectDisplay = (projCards: NodeList) => {
+    
+    if (projCards) {
+        for (let i = 0; i < projCards.length ; i++) {
+            (projCards[i] as HTMLElement).classList.add("proj-oov");
+            (projCards[i] as HTMLElement).classList.remove("proj-prev");
+            (projCards[i] as HTMLElement).classList.remove("proj-next");
+            (projCards[i] as HTMLElement).classList.remove("proj-active");
+        }
 
-    const filterField = document.createElement("div");
+        (projCards[currentProjCard] as HTMLElement).classList.remove("proj-prev");
+        (projCards[currentProjCard] as HTMLElement).classList.remove("proj-next");
+        (projCards[currentProjCard] as HTMLElement).classList.add("proj-active");
 
-    // Create the label for the input
-    const labelSelect = document.createElement("label");
-    labelSelect.textContent = `Filter ${selectText}: `;
-    labelSelect.htmlFor = `${idName}`;
+        let nextCard = currentProjCard + 1;
+        let prevCard = currentProjCard - 1;
+        if (projCards[prevCard]) {
+            (projCards[prevCard] as HTMLElement).classList.remove("proj-oov", "proj-prev", "proj-next");
+            (projCards[prevCard] as HTMLElement).classList.add("proj-prev");
+        }
+        if (projCards[nextCard]) {
+            (projCards[nextCard] as HTMLElement).classList.remove("proj-oov", "proj-prev", "proj-next");
+            (projCards[nextCard] as HTMLElement).classList.add("proj-next");
+        }
 
-    // Create the select element
-    const selectElement = document.createElement("select");
-    // Assign id and name 
-    selectElement.id = `${idName}`;
-    selectElement.name = `${idName}`; 
-
-
-    const typeAll = document.createElement("option");
-    typeAll.value = "All";
-    typeAll.textContent = "All";
-    selectElement.appendChild(typeAll);
-
-    arrayTypes.forEach((type: any) => {
-        const typeOption = document.createElement("option");
-        typeOption.value = type;
-        typeOption.textContent = type;
-        selectElement.appendChild(typeOption);
-    });
-
-    filterField?.appendChild(labelSelect);
-    filterField?.appendChild(selectElement);
-    container?.appendChild(filterField);
-
+    }
+    else {
+        return;
+    }
 }
 
 const displayJobs = (jobArray: Job[]) => {
@@ -246,12 +342,16 @@ const educationDisplay = (education: Education[]) => {
 
 }
 
-const jobFilterId = "job-types";
+techSkillsList();   
+displayProjects(projects, 10);
+const projCards : NodeList = document.querySelectorAll(".project-card");
+updateProjectDisplay(projCards);
 // Initialize both the job filter and the jobs display
 displayFilter(jobs, "by Job Type", jobFilterId, jobCardsDivContainer as HTMLDivElement);
 displayJobs(jobs);
 // Initialize the education display
 educationDisplay(education);
+
 
 /*
  * 
@@ -262,139 +362,18 @@ educationDisplay(education);
 // Select the job filter to add an event listener
 const jobFilterSelect = document.getElementById(jobFilterId);
 
+
 // On every change of the jobFilter, do the following...
 jobFilterSelect?.addEventListener('change', (event) => {
     const filteredJobs = filterEvent(event, jobs);
     displayJobs(filteredJobs);
 });
 
-/*
- *
- *
- * Projects section 
- * 
- */
-
-const projectContainerDiv = document.getElementById("projects-div-container"); 
-let currentProjCard: number = 0;
-
-const displayProjects = (projects: Project[], projectLimit: number) => {
-    let projectCardsDiv = document.getElementById("project-cards-div");
-    if (projectLimit > projects.length) {
-        projectLimit = projects.length;
-        currentProjCard = Math.ceil(projects.length / 2) - 1;
-    }
-    else {
-        currentProjCard = Math.ceil(projectLimit / 2) - 1;
-    }
-
-    if (!projectCardsDiv) {
-        projectCardsDiv = document.createElement("div");
-        projectCardsDiv.id = "project-cards-div";
-        projectContainerDiv?.appendChild(projectCardsDiv);
-    }
-
-    projectCardsDiv.replaceChildren();
-    
-    for (let projIndex = 0; projIndex < projectLimit; projIndex++) {
-
-        let {
-            type,
-            projImgs,
-            projTitle,
-            projStart,
-            projFinish
-        } = projects[projIndex] as Project;
-
-
-        if (projTitle.length > 40) {
-            projTitle = `${projTitle.slice(0, 40)}...`;
-        }
-
-
-        const projectCardA = document.createElement("a");
-
-
-        const projectInfo = document.createElement("div");
-        const projectTypeP = document.createElement("p");
-        projectTypeP.classList.add("type");
-        const projectImg = document.createElement("img");
-        const projectTitleh3 = document.createElement("h3");
-        const projectIntervalP = document.createElement("p");
-
-        projectCardA.href = `projects/index.html?project-name=${encodeURI(projTitle)}`;
-
-
-        projectTypeP.textContent = type.join(", ");
-
-        projectImg.src = (projImgs[0] && projImgs[0] !== "#") ? projImgs[0] : "https://placehold.net/400x400.png";
-        projectImg.className = "proj-img";
-
-        projectTitleh3.textContent = projTitle;
-
-        projectIntervalP.textContent = `${projStart} - ${projFinish}`
-
-        
-        projectCardA.appendChild(projectImg);
-        projectInfo.appendChild(projectTypeP);
-        projectInfo.appendChild(projectTitleh3);
-        projectInfo.appendChild(projectIntervalP);
-        projectCardA.appendChild(projectInfo);
-        
-        projectCardsDiv.appendChild(projectCardA);
-
-
-    }
-
-
-
-
-}
-
-displayProjects(projects, 10);
-const projCards : NodeList = document.querySelectorAll(".project-card");
-
-const updateProjectDisplay = () => {
-    
-    if (projCards) {
-        for (let i = 0; i < projCards.length ; i++) {
-            (projCards[i] as HTMLElement).classList.add("proj-oov");
-            (projCards[i] as HTMLElement).classList.remove("proj-prev");
-            (projCards[i] as HTMLElement).classList.remove("proj-next");
-            (projCards[i] as HTMLElement).classList.remove("proj-active");
-        }
-
-        (projCards[currentProjCard] as HTMLElement).classList.remove("proj-prev");
-        (projCards[currentProjCard] as HTMLElement).classList.remove("proj-next");
-        (projCards[currentProjCard] as HTMLElement).classList.add("proj-active");
-
-        let nextCard = currentProjCard + 1;
-        let prevCard = currentProjCard - 1;
-        if (projCards[prevCard]) {
-            (projCards[prevCard] as HTMLElement).classList.remove("proj-oov", "proj-prev", "proj-next");
-            (projCards[prevCard] as HTMLElement).classList.add("proj-prev");
-        }
-        if (projCards[nextCard]) {
-            (projCards[nextCard] as HTMLElement).classList.remove("proj-oov", "proj-prev", "proj-next");
-            (projCards[nextCard] as HTMLElement).classList.add("proj-next");
-        }
-
-    }
-    else {
-        return;
-    }
-}
-
-updateProjectDisplay();
-
-const projLeftBtn = document.getElementById("btn-left");
-const projRightBtn = document.getElementById("btn-right");
-
 projLeftBtn?.addEventListener('click', () => {
     if (currentProjCard > 0) {
         currentProjCard -= 1;
     }
-    updateProjectDisplay();
+    updateProjectDisplay(projCards);
 
 });
 
@@ -402,7 +381,7 @@ projRightBtn?.addEventListener('click', () => {
     if (currentProjCard < projCards.length - 1) {
         currentProjCard += 1;
     }
-    updateProjectDisplay();
+    updateProjectDisplay(projCards);
 });
 
 /*
@@ -412,47 +391,4 @@ projRightBtn?.addEventListener('click', () => {
  * 
  */
 
-const techSkillsDiv = document.getElementById("technical-skills-container");
-const techSkillsList = () => {
-    const skillTypes : string[] = Object.keys(skills);
-    skillTypes.forEach((skillType) => {
-        if (skills[skillType]) {
-            const skillDiv = document.createElement("div");
-            const skillh2 = document.createElement("h2");
-            skillh2.textContent = `${skillType}`;
 
-            techSkillsDiv?.appendChild(skillh2);
-
-            skills[skillType].forEach((skill) => {
-                const {
-                    icon,
-                    skillName,
-                    searchName
-                } = skill;
-
-
-                const iconClassArr = icon.split(" ");
-                const skillCardA = document.createElement("a");
-                const skillCardIcon = document.createElement("i");
-                const skillCardBody = document.createElement("div");
-                const skillNameP = document.createElement("p");
-                
-                skillCardIcon.classList.add(...iconClassArr);
-                skillNameP.textContent = skillName;
-                skillCardA.href = `./projects/index.html?skill=${searchName}`;
-
-                skillCardA.appendChild(skillCardIcon);
-                skillCardBody.appendChild(skillNameP);
-                skillCardA.appendChild(skillCardBody);
-                skillDiv.appendChild(skillCardA);
-
-            });
-
-            techSkillsDiv?.appendChild(skillDiv);
-            
-        }
-        
-    });
-}
-
-techSkillsList();   

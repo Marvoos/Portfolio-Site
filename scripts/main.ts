@@ -44,6 +44,14 @@ export const getMonthYearDate = (startDate: Date): string => {
     return `${monthKey[startMonth]} ${startYear}`;
 }
 
+// Helper function to retrieve a set of all types. This prevents any duplicates from appearing within the list.
+export const getUniqueTypes = (array: Array<any>): string[] => {
+    // Map all job types into a flatmap to convert allTypes to a 1-dimensional array
+    const allTypes: string[] = array.flatMap((item) => item.type);
+    // Convert allTypes array to a set and return this value
+    return [...new Set(allTypes)];
+}
+
 export const skills : { [key: string]: Skill[] } = {
         languages: [
         {

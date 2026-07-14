@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Kameron:wght@400..700&display=swap');
 
 /*Standard variables - dark mode*/
 :root {
@@ -34,44 +35,14 @@ p, label, li, a, h4, h5, h6 {
 
 /*Standard large text font - Lucida sans*/
 h1, h2, h3 {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Kameron", serif;
 }
 
+.bg {
+    background-color: var(--bg-color);
+    color: var(--txt);
+}
 
-
- /*
- *
- *
- * End of navbar classes
- */
-
- 
- /*
- *
- *
- * Beginning of Jumbo/Hero classes
- */
-
-
-
-
- /*
- *
- *
- * End of Jumbo/Hero classes
- */
-
-  /*
- *
- *
- * Beginning of skill cards classes
- */
-
-  /*
- *
- *
- * End of skill cards classes
- */
 
   /*
  *
@@ -163,10 +134,4 @@ h1, h2, h3 {
  *
  *
  * End of projects classes
- */
-
-/*
- *
- *
- * Beginning of other classes
  */
