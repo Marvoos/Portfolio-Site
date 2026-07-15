@@ -37,7 +37,7 @@ const techSkillsList = () => {
     skillTypes.forEach((skillType) => {
         if (skills[skillType]) {
             const skillDiv = document.createElement("div");
-            const skillh2 = document.createElement("h2");
+            const skillh2 = document.createElement("h3");
             skillh2.textContent = `${skillType}`;
 
             techSkillsDiv?.appendChild(skillh2);
@@ -117,7 +117,7 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
         const projectTypeP = document.createElement("p");
         projectTypeP.classList.add("type");
         const projectImg = document.createElement("img");
-        const projectTitleh3 = document.createElement("h3");
+        const projectTitleh3 = document.createElement("h4");
         const projectIntervalP = document.createElement("p");
 
         projectCardA.href = `projects/index.html?project-name=${encodeURI(projTitle)}`;

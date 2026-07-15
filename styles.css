@@ -5,14 +5,15 @@
     --secondary: #1a2233;
     --surface: #ffffff;
     --txt: #2a303e;
-    --primary: #dfe2e8;
+    --primary: #e4e4e4;
     --accent: #ff6b6b;
 
 
-    --shadow: 0.1rem 0.1rem 0.25rem #070c15;
+    --shadow: 0.1rem 0.1rem 0.25rem #070c150c;
 
-    --standard-border-radius: 1.618rem;
+    --standard-border-radius: calc(var(--golden-ratio) * 1);
 
+    --golden-ratio: 1.618rem;
     --grid-cols: 12;
     --content-col-width: 8;
 }
@@ -41,101 +42,34 @@ h1, h2, h3 {
     font-family: "Kameron", serif;
 }
 
-  /*
- *
- *
- * Beginning of projects classes
- */
-
-/*Class for project out of view*/
-.proj-oov {
-    display: none;
-    animation: scale-out-of-view 0.3s linear;
+h1 {
+    font-size: calc(var(--golden-ratio) * 4);
 }
 
-/*Class for the active project*/
-.proj-active {
-    display: block;
-    animation: scaling 0.5s ease;
-    
+h2 {
+    font-size: calc(var(--golden-ratio) * 3);
 }
 
-/*Next and previous project classes*/
-.proj-next, .proj-prev {
-    display: block;
-    opacity: 0.5;
-    transform: scale(0.85);
+h3 {
+    font-size: calc(var(--golden-ratio) * 2);
 }
 
-/*Animation to prevent issues with visuals when changing the current project card*/
-@keyframes scale-out-of-view {
-  0% {
-    opacity: 1;
-    transform: scale(0.85);
-    width: 20rem;        
-    margin-right: var(--margin-md); 
-    padding: 16px;   
-    visibility: visible;
-  }
-  40% {
-    opacity: 0;
-    transform: scale(0.85);
-    width: 300px;
-    margin-right: 20px;
-    padding: var(--margin-md);
-    visibility: visible;
-  }
-  99% {
-    opacity: 0;
-    transform: scale(0.8);
-    width: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
-    visibility: visible;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.8);
-    width: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
-    visibility: hidden;
-  }
+h4 {
+    font-size: calc(var(--golden-ratio) * 1);
 }
 
-/*Scales and changes opcaity of project cards when they become active*/
-@keyframes scaling {
-    from {
-        opacity: 0.5;
-        transform: scale(0.85);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+h5 {
+    font-size: 1rem;
 }
-
-/*Hover animation for project cards on project page*/
-@keyframes card-hover-anim {
-    25% {
-        outline: solid 0.3rem var(--surface);
-    }
-    90% {
-        outline: solid 0.5rem var(--surface);
-    }
-}
-
-/*
- *
- *
- * End of projects classes
- */
 
 .bg {
     background-color: var(--primary);
     color: var(--txt);
+    /* Creates a subtle 40px grid pattern */
+    background-image: 
+        linear-gradient(to right, rgba(10, 25, 47, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(10, 25, 47, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
 }
 
 .grid {
@@ -145,12 +79,18 @@ h1, h2, h3 {
 }
 
 .section {
-    grid-column: span var(--content-col-width);
+    grid-column: span var(--grid-cols);
+    padding: calc(var(--golden-ratio) * 1) calc(var(--golden-ratio) * 6);
 }
 
 .nav {
     grid-column: span var(--grid-cols);
-    height: 7rem;
+    height: calc(var(--golden-ratio) * 4);
+    background-color: var(--primary);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .nav-body {
@@ -158,7 +98,7 @@ h1, h2, h3 {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .nav-links {
@@ -174,11 +114,11 @@ h1, h2, h3 {
     text-decoration: none;
     color: var(--secondary);
     background: none;
-    padding: 1rem 1.618rem;
-    border-radius: var(--standard-border-radius);
-    border: solid var(--secondary) 3px;
+    padding: 1rem var(--golden-ratio);
+    border-radius: var(--standard-border-radius);   
     opacity: 0.85;
     outline: none;
+    font-weight: 900;
 }
 
 .nav-link.active-nav {
@@ -186,3 +126,51 @@ h1, h2, h3 {
     color: var(--primary);
     background-color: var(--secondary);
 }
+
+.nav-logo-title-div {
+    display: flex;
+    margin-left: calc(var(--golden-ratio) * 3);
+    align-items: center;
+    opacity: 0.9;
+}
+
+.port-logo {
+    width: calc(var(--golden-ratio) * 2);
+    height: auto;
+}
+
+.nav-title {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: var(--golden-ratio);
+    margin-left: 1rem;
+}  
+
+.jumbo-div {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.jumbo-img-div {
+    display: flex;
+    justify-content: end;
+}
+
+.port-jumbo-info-div {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.jumbo-img {
+    object-fit: cover;
+    width: 55%;
+    height: auto;
+    background-color: #ff6b6b;
+    padding: 0;
+}
+
+.about-me {
+    background-color: #070c1505;    
+}
+
