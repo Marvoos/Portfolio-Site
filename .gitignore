@@ -18,3 +18,5 @@ node_modules/
 
 # Production build output folder
 dist/
+
+.env
