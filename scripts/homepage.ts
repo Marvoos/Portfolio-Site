@@ -32,6 +32,7 @@ const educationExperience = document.getElementById('education-cards');
 
 
 
+
 const techSkillsList = () => {
     const skillTypes : string[] = Object.keys(skills);
     skillTypes.forEach((skillType) => {
