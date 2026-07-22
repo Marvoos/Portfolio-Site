@@ -39,7 +39,7 @@ const techSkillsList = () => {
         if (skills[skillType]) {
             const skillDiv = document.createElement("div");
             const skillh2 = document.createElement("h3");
-            skillh2.textContent = `${skillType}`;
+            skillh2.textContent = `${skillType[0]?.toUpperCase()}${skillType.slice(1)}`;
 
             techSkillsDiv?.appendChild(skillh2);
 

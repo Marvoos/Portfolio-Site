@@ -155,7 +155,6 @@ h5 {
 .jumbo-div {
     display: flex;
     flex-direction: column;
-    height: fit-content;
 }
 
 .jumbo-img-div {
@@ -165,8 +164,7 @@ h5 {
 
 .port-jumbo-info-div {
     display: flex;
-    justify-content: start;
-    align-items: center;
+    flex-direction: column;
     animation: from-left 2s ease normal forwards;
 }
 
@@ -224,39 +222,8 @@ h5 {
     margin-bottom: 0.5rem;
 }
 
-.site-resources {
-    width: 30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: center;
-    padding: 1rem;
-}
-
-.site-resources > img {
-    width: 100%;
-    height: 90%;
-    object-fit:fill;
-    margin-bottom: 1rem;
-    border: var(--primary) solid 2px;
-}
-
-.site-resources a {
-    text-align: center;
-    padding: calc(var(--golden-ratio) * 0.5);
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    text-decoration: none;
-    transition: 0.2s;
-    width: 100%;
-    height: 10%;
-}
-
-.site-resources a:hover {
-    border: 2px solid var(--primary);
-    color: var(--secondary);
-    background-color: var(--primary);
+.about-me > .summary {
+    width: 55%;
 }
 
 .professional-links {
@@ -293,3 +260,47 @@ h5 {
     color: var(--secondary);
 }
 
+.professional-links a:first-of-type {
+    margin-left: 0;
+}
+
+.stats-working-on {
+    height: 100%;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    background-color: #2a303e3f /*Text colour with an added alpha channel of 3F*/;
+    padding: var(--golden-ratio);
+    border-radius: var(--golden-ratio);
+    opacity: 0.9;
+}
+
+.stats-working-on > div {
+    margin-bottom: calc(var(--golden-ratio) * 2);
+}
+
+.list-title-spacing {
+    margin-bottom: 1rem;
+}
+
+.p-spacing {
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    margin: calc(var(--golden-ratio) * 1) 0;
+    background-color: var(--accent);
+    padding: 1rem calc(var(--golden-ratio) * 1);
+    border-radius: var(--golden-ratio);
+    font-weight: 700;
+    color: var(--primary);
+    text-decoration: none;
+    border: solid 2px var(--accent);
+}
+
+.btn-primary:hover {
+    filter: brightness(0.9);
+}
