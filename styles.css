@@ -3,7 +3,7 @@
 /*Standard variables - dark mode*/
 :root {
     --secondary: #1a2233;
-    --surface: #ffffff67;
+    --surface: #ffffff;
     --txt: #2a303e;
     --primary: #e4e4e4;
     --accent: #ff6b6b;
@@ -85,8 +85,9 @@ h5 {
     position: relative;
 }
 
-.coords-decor {
-
+.highlight {
+    color: var(--accent);
+    font-weight: 700;
 }
 
 .nav {
@@ -201,11 +202,12 @@ h5 {
 .about-me {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: calc(var(--golden-ratio) * 2);
-    align-items: flex-start;
+    align-items: center;
     background-color: var(--secondary);
     color: var(--primary);
-    height: 35rem;
+    height: fit-content;
 }
 
 .about-me p {
@@ -223,7 +225,7 @@ h5 {
 }
 
 .about-me > .summary {
-    width: 55%;
+    width: 50%;
 }
 
 .professional-links {
@@ -271,13 +273,13 @@ h5 {
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    background-color: #2a303e3f /*Text colour with an added alpha channel of 3F*/;
-    padding: var(--golden-ratio);
-    border-radius: var(--golden-ratio);
+    padding: var(--golden-ratio) var(--golden-ratio) calc(var(--golden-ratio) * 2) var(--golden-ratio);
+    border-left: solid 2px var(--accent);
+    background-color: #2a303e58;
     opacity: 0.9;
 }
 
-.stats-working-on > div {
+.stats-working-on > div:first-of-type {
     margin-bottom: calc(var(--golden-ratio) * 2);
 }
 
@@ -304,3 +306,71 @@ h5 {
 .btn-primary:hover {
     filter: brightness(0.9);
 }
+
+.skill-card {
+    display: flex;
+    gap: calc(var(--golden-ratio) / 3);
+    font-size: var(--golden-ratio);
+    color: var(--primary);
+    text-decoration: none;
+    background-color: var(--secondary);
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem var(--golden-ratio);
+    border-radius: var(--golden-ratio);
+    margin: 1rem;
+}
+
+#technical-skills-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 70%;
+
+}
+
+
+
+@media screen and (max-width: 1360px) {
+    html {
+        font-size: 14px;
+    }
+    .section {
+        padding: calc(var(--golden-ratio) * 1) calc(var(--golden-ratio) * 3);
+    }
+}
+
+@media screen and (max-width: 1032px) {
+    .about-me > .summary {
+        width: 100%;
+    }
+
+    .about-me > .stats-working-on {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    h1 {
+        font-size: calc(var(--golden-ratio) * 3);
+    }
+
+    h2 {
+        font-size: calc(var(--golden-ratio) * 2);
+    }
+
+    h3 {
+        font-size: calc(var(--golden-ratio) * 1);
+    }
+
+    h4 {
+        font-size: 1rem;
+    }
+
+    h5 {
+        font-size: calc(var(--golden-ratio) / 2);
+    }
+
+}
+

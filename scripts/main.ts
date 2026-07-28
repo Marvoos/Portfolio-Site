@@ -95,12 +95,12 @@ export const skills : { [key: string]: Skill[] } = {
         },
         {
             icon: 'fa-brands fa-react',
-            skillName: "ReactJs",
+            skillName: "React.js",
             searchName: "react", 
         },
         {
             icon: 'fa-brands fa-node-js',
-            skillName: "Nodejs",
+            skillName: "Node.js",
             searchName: "node",
         },
     ]

@@ -37,11 +37,6 @@ const techSkillsList = () => {
     const skillTypes : string[] = Object.keys(skills);
     skillTypes.forEach((skillType) => {
         if (skills[skillType]) {
-            const skillDiv = document.createElement("div");
-            const skillh2 = document.createElement("h3");
-            skillh2.textContent = `${skillType[0]?.toUpperCase()}${skillType.slice(1)}`;
-
-            techSkillsDiv?.appendChild(skillh2);
 
             skills[skillType].forEach((skill) => {
                 const {
@@ -60,15 +55,16 @@ const techSkillsList = () => {
                 skillCardIcon.classList.add(...iconClassArr);
                 skillNameP.textContent = skillName;
                 skillCardA.href = `./projects/index.html?skill=${searchName}`;
+                skillCardA.classList.add('skill-card');
 
                 skillCardA.appendChild(skillCardIcon);
                 skillCardBody.appendChild(skillNameP);
                 skillCardA.appendChild(skillCardBody);
-                skillDiv.appendChild(skillCardA);
+                techSkillsDiv?.appendChild(skillCardA);
 
             });
 
-            techSkillsDiv?.appendChild(skillDiv);
+            
             
         }
         
