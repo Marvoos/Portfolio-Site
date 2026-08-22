@@ -11,9 +11,6 @@ import type { Education } from './types';
 import { projects } from './main';
 import type { Project } from './types';
 
-import { skills } from './main';
-import type { Skill } from './types';
-
 import { filterEvent, displayFilter } from './filterFunc';
 
 const techSkillsDiv = document.getElementById("technical-skills-container");
@@ -32,44 +29,6 @@ const educationExperience = document.getElementById('education-cards');
 
 
 
-
-const techSkillsList = () => {
-    const skillTypes : string[] = Object.keys(skills);
-    skillTypes.forEach((skillType) => {
-        if (skills[skillType]) {
-
-            skills[skillType].forEach((skill) => {
-                const {
-                    icon,
-                    skillName,
-                    searchName
-                } = skill;
-
-
-                const iconClassArr = icon.split(" ");
-                const skillCardA = document.createElement("a");
-                const skillCardIcon = document.createElement("i");
-                const skillCardBody = document.createElement("div");
-                const skillNameP = document.createElement("p");
-                
-                skillCardIcon.classList.add(...iconClassArr);
-                skillNameP.textContent = skillName;
-                skillCardA.href = `./projects/index.html?skill=${searchName}`;
-                skillCardA.classList.add('skill-card');
-
-                skillCardA.appendChild(skillCardIcon);
-                skillCardBody.appendChild(skillNameP);
-                skillCardA.appendChild(skillCardBody);
-                techSkillsDiv?.appendChild(skillCardA);
-
-            });
-
-            
-            
-        }
-        
-    });
-}
 
 
 
@@ -146,36 +105,6 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
 
 }
 
-const updateProjectDisplay = (projCards: NodeList) => {
-    
-    if (projCards) {
-        for (let i = 0; i < projCards.length ; i++) {
-            (projCards[i] as HTMLElement).classList.add("proj-oov");
-            (projCards[i] as HTMLElement).classList.remove("proj-prev");
-            (projCards[i] as HTMLElement).classList.remove("proj-next");
-            (projCards[i] as HTMLElement).classList.remove("proj-active");
-        }
-
-        (projCards[currentProjCard] as HTMLElement).classList.remove("proj-prev");
-        (projCards[currentProjCard] as HTMLElement).classList.remove("proj-next");
-        (projCards[currentProjCard] as HTMLElement).classList.add("proj-active");
-
-        let nextCard = currentProjCard + 1;
-        let prevCard = currentProjCard - 1;
-        if (projCards[prevCard]) {
-            (projCards[prevCard] as HTMLElement).classList.remove("proj-oov", "proj-prev", "proj-next");
-            (projCards[prevCard] as HTMLElement).classList.add("proj-prev");
-        }
-        if (projCards[nextCard]) {
-            (projCards[nextCard] as HTMLElement).classList.remove("proj-oov", "proj-prev", "proj-next");
-            (projCards[nextCard] as HTMLElement).classList.add("proj-next");
-        }
-
-    }
-    else {
-        return;
-    }
-}
 
 const displayJobs = (jobArray: Job[]) => {
     // Retrieve the job cards container
@@ -338,17 +267,15 @@ const educationDisplay = (education: Education[]) => {
 
 
 }
+  
+displayProjects(projects, 3);
 
-techSkillsList();   
-displayProjects(projects, 10);
-const projCards : NodeList = document.querySelectorAll(".project-card");
-updateProjectDisplay(projCards);
+
 // Initialize both the job filter and the jobs display
 displayFilter(jobs, "by Job Type", jobFilterId, jobCardsDivContainer as HTMLDivElement);
 displayJobs(jobs);
 // Initialize the education display
 educationDisplay(education);
-
 
 /*
  * 
@@ -364,21 +291,6 @@ const jobFilterSelect = document.getElementById(jobFilterId);
 jobFilterSelect?.addEventListener('change', (event) => {
     const filteredJobs = filterEvent(event, jobs);
     displayJobs(filteredJobs);
-});
-
-projLeftBtn?.addEventListener('click', () => {
-    if (currentProjCard > 0) {
-        currentProjCard -= 1;
-    }
-    updateProjectDisplay(projCards);
-
-});
-
-projRightBtn?.addEventListener('click', () => {
-    if (currentProjCard < projCards.length - 1) {
-        currentProjCard += 1;
-    }
-    updateProjectDisplay(projCards);
 });
 
 /*
