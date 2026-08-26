@@ -13,14 +13,8 @@ import type { Project } from './types';
 
 import { filterEvent, displayFilter } from './filterFunc';
 
-const techSkillsDiv = document.getElementById("technical-skills-container");
-// Retrieve the outer container div to put the jobs inside.
 
-
-const projectContainerDiv = document.getElementById("projects-div-container"); 
-let currentProjCard: number = 0;
-const projLeftBtn = document.getElementById("btn-left");
-const projRightBtn = document.getElementById("btn-right");
+const projectContainerDiv = document.querySelector(".section.projects"); 
 
 const jobCardsDivContainer = document.getElementById('jobs');
 const jobFilterId = "job-types";
@@ -36,10 +30,6 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
     let projectCardsDiv = document.getElementById("project-cards-div");
     if (projectLimit > projects.length) {
         projectLimit = projects.length;
-        currentProjCard = Math.ceil(projects.length / 2) - 1;
-    }
-    else {
-        currentProjCard = Math.ceil(projectLimit / 2) - 1;
     }
 
     if (!projectCardsDiv) {
@@ -48,8 +38,6 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
         projectContainerDiv?.appendChild(projectCardsDiv);
     }
 
-    projectCardsDiv.replaceChildren();
-    
     for (let projIndex = 0; projIndex < projectLimit; projIndex++) {
 
         let {
@@ -70,28 +58,31 @@ const displayProjects = (projects: Project[], projectLimit: number) => {
         projectCardA.classList.add("project-card");
 
         const projectInfo = document.createElement("div");
+        projectInfo.classList.add('proj-info');
         const projectTypeP = document.createElement("p");
-        projectTypeP.classList.add("type");
+        projectTypeP.classList.add("proj-type");
         const projectImg = document.createElement("img");
-        const projectTitleh3 = document.createElement("h4");
+        const projectTitleh4 = document.createElement("h4");
+        projectTitleh4.classList.add('proj-title');
         const projectIntervalP = document.createElement("p");
+        projectIntervalP.classList.add('proj-interval');
 
         projectCardA.href = `projects/index.html?project-name=${encodeURI(projTitle)}`;
 
 
         projectTypeP.textContent = type.join(", ");
 
-        projectImg.src = (projImgs[0] && projImgs[0] !== "#") ? projImgs[0] : "https://placehold.net/400x400.png";
+        projectImg.src = (projImgs[0] && projImgs[0] !== "#") ? projImgs[0] : "https://placehold.net/600x400.png";
         projectImg.className = "proj-img";
 
-        projectTitleh3.textContent = projTitle;
+        projectTitleh4.textContent = projTitle;
 
         projectIntervalP.textContent = `${projStart} - ${projFinish}`
 
         
         projectCardA.appendChild(projectImg);
         projectInfo.appendChild(projectTypeP);
-        projectInfo.appendChild(projectTitleh3);
+        projectInfo.appendChild(projectTitleh4);
         projectInfo.appendChild(projectIntervalP);
         projectCardA.appendChild(projectInfo);
         

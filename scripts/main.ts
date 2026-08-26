@@ -99,7 +99,7 @@ export const projects: Project[] = [
    {
         type: ["Web Development", "Front End"],
         projLink: "https://github.com/Marvoos/PortfolioSite",
-        projImgs: ["#"],
+        projImgs: ["../images/project-imgs/port-imgs/port1.png"],
         projTitle: "Personal Portfolio using Front-End Technologies",
         projStart: getMonthYearDate(new Date("2026-06-11")),
         projFinish: "NOW",
