@@ -56,11 +56,6 @@ export const projects: Project[] = [
         type: ["Web Development", "Full Stack"],
         projLink: "https://github.com/Mini1Git/project3340",
         projImgs: [
-            "../images/project-imgs/grillow-imgs/grillow1.png",
-            "../images/project-imgs/grillow-imgs/grillow2.png",
-            "../images/project-imgs/grillow-imgs/grillow3.png",
-            "../images/project-imgs/grillow-imgs/grillow4.png",
-            "../images/project-imgs/grillow-imgs/grillow5.png"
         ],
         projTitle: "Food Ordering & Delivery Web Application (PHP + MariaDB)",
         projStart: getMonthYearDate(new Date("2026-01-07")),
@@ -75,15 +70,7 @@ export const projects: Project[] = [
    {
         type: ["Web Development", "Full Stack"],
         projLink: "https://github.com/Marvoos/project3077",
-        projImgs: [
-            "../images/project-imgs/sfs-imgs/sls1.png",
-            "../images/project-imgs/sfs-imgs/sls2.png",
-            "../images/project-imgs/sfs-imgs/sls3.png",
-            "../images/project-imgs/sfs-imgs/sls4.png",
-            "../images/project-imgs/sfs-imgs/sls5.png",
-            "../images/project-imgs/sfs-imgs/sls6.png",
-            "../images/project-imgs/sfs-imgs/sls7.png"
-        ],
+        projImgs: [],
         projTitle: "Full-Stack Library Management System (PHP + MariaDB)",
         projStart: getMonthYearDate(new Date("2026-01-07")),
         projFinish: getMonthYearDate(new Date("2026-04-18")),
@@ -99,7 +86,7 @@ export const projects: Project[] = [
    {
         type: ["Web Development", "Front End"],
         projLink: "https://github.com/Marvoos/PortfolioSite",
-        projImgs: ["../images/project-imgs/port-imgs/port1.png"],
+        projImgs: [],
         projTitle: "Personal Portfolio using Front-End Technologies",
         projStart: getMonthYearDate(new Date("2026-06-11")),
         projFinish: "NOW",
